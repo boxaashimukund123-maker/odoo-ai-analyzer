@@ -14,39 +14,91 @@ st.set_page_config(
 )
 
 # ============================================
-# CUSTOM CSS
+# PREMIUM CSS / MOBILE UI
 # ============================================
 
 st.markdown("""
 <style>
 
+/* Main App */
 .stApp {
-    background-color: #0E1117;
+    background: linear-gradient(to bottom right, #0E1117, #111827);
     color: white;
 }
 
+/* Sidebar */
 section[data-testid="stSidebar"] {
     background-color: #161B22;
+    border-right: 1px solid #30363D;
 }
 
+/* Metric Cards */
 div[data-testid="metric-container"] {
-    background-color: #161B22;
+    background: #161B22;
     border: 1px solid #30363D;
-    padding: 15px;
-    border-radius: 12px;
+    padding: 18px;
+    border-radius: 16px;
+    transition: 0.3s ease;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
 }
 
+/* Metric Hover */
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-5px);
+    border: 1px solid #2EA043;
+    box-shadow: 0px 0px 20px rgba(46,160,67,0.5);
+}
+
+/* Buttons */
 div.stButton > button {
-    background-color: #238636;
+    background: linear-gradient(to right, #238636, #2EA043);
     color: white;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     font-weight: bold;
+    transition: 0.3s ease;
 }
 
+/* Button Hover */
 div.stButton > button:hover {
-    background-color: #2EA043;
+    transform: scale(1.03);
+    box-shadow: 0px 0px 15px rgba(46,160,67,0.5);
+}
+
+/* Text Inputs */
+.stTextInput input {
+    background-color: #161B22 !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+/* File Upload */
+[data-testid="stFileUploader"] {
+    background-color: #161B22;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid #30363D;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+
+    .block-container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    div[data-testid="metric-container"] {
+        padding: 12px;
+    }
 }
 
 </style>
@@ -98,10 +150,11 @@ else:
 AI Odoo ERP Analyzer
 
 Features:
-- ERP Analysis
 - AI Forecasting
-- Smart Recommendations
 - Interactive Charts
+- Smart Recommendations
+- Mobile Friendly
+- Premium UI
 """)
 
     if st.sidebar.button("Logout"):
@@ -119,25 +172,28 @@ Features:
     st.divider()
 
     # ============================================
-    # FILE UPLOADER
+    # FILE UPLOAD
     # ============================================
 
     uploaded_file = st.file_uploader(
-        "📂 Upload your ERP CSV file",
+        "📂 Upload ERP CSV File",
         type=["csv"]
     )
 
     # ============================================
-    # IF FILE EXISTS
+    # DATA ANALYSIS
     # ============================================
 
     if uploaded_file is not None:
 
         df = pd.read_csv(uploaded_file)
 
-        st.subheader("📋 Uploaded Data")
+        st.subheader("📋 Uploaded ERP Data")
 
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(
+            df,
+            use_container_width=True
+        )
 
         # ============================================
         # SALES SUMMARY
@@ -165,7 +221,7 @@ Features:
         lowest_product = summary.idxmin()
         lowest_sales = int(summary.min())
 
-        average_sales = int(summary.mean())
+        avg_sales = int(summary.mean())
 
         growth_percent = random.randint(5, 20)
 
@@ -194,7 +250,7 @@ Features:
 
         col4.metric(
             "📊 Avg Sales",
-            average_sales
+            avg_sales
         )
 
         col5.metric(
@@ -233,13 +289,13 @@ Features:
         st.divider()
 
         # ============================================
-        # FORECAST
+        # AI FORECAST
         # ============================================
 
         st.subheader("📈 AI Forecast")
 
         st.info(
-            f"Projected growth next month: "
+            f"Projected business growth next month: "
             f"{growth_percent}%"
         )
 
@@ -269,7 +325,7 @@ Features:
         st.divider()
 
         # ============================================
-        # SMART AI CHAT
+        # AI CHAT
         # ============================================
 
         st.subheader("💬 Ask AI About Your Business Data")
@@ -293,8 +349,7 @@ Features:
 
                 st.error(
                     f"{lowest_product} is the "
-                    f"lowest-performing product "
-                    f"with sales of {lowest_sales}."
+                    f"lowest-performing product."
                 )
 
             elif "summary" in q:
@@ -303,14 +358,7 @@ Features:
                     f"Total sales are {total_sales}."
                 )
 
-            elif "average" in q:
-
-                st.info(
-                    f"Average sales are "
-                    f"{average_sales}."
-                )
-
-            elif "forecast" in q or "prediction" in q:
+            elif "forecast" in q:
 
                 st.success(
                     f"Predicted next month sales: "
@@ -320,41 +368,37 @@ Features:
             elif "trend" in q:
 
                 st.success(
-                    f"Business growth trend is "
-                    f"{growth_percent}% upward."
+                    f"Strong upward trend detected "
+                    f"with {growth_percent}% growth."
                 )
 
             elif "risk" in q:
 
                 st.error(
-                    f"Potential risk detected in "
-                    f"{lowest_product} due to "
-                    f"low performance."
+                    f"Potential business risk "
+                    f"detected in {lowest_product}."
                 )
 
             elif "strategy" in q:
 
                 st.info(
-                    f"Recommended strategy: "
-                    f"scale {top_product}, improve "
-                    f"marketing for {lowest_product}, "
-                    f"and optimize pricing."
+                    f"Recommended strategy: scale "
+                    f"{top_product} and improve "
+                    f"marketing for {lowest_product}."
                 )
 
             elif "recommend" in q:
 
                 st.warning(
-                    f"Focus on improving "
-                    f"{lowest_product} while "
-                    f"expanding {top_product}."
+                    f"Focus more on {top_product} "
+                    f"while improving {lowest_product}."
                 )
 
             else:
 
                 st.info("""
 Try asking:
-- top product
-- worst product
+- top products
 - forecast
 - risks
 - trends
@@ -365,5 +409,5 @@ Try asking:
     else:
 
         st.info(
-            "📁 Upload a CSV file to begin analysis."
+            "📁 Upload a CSV file to begin ERP analysis."
         )
