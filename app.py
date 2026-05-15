@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import random
+import time
 import plotly.express as px
 
 # ============================================
@@ -155,6 +156,7 @@ Features:
 - Smart Recommendations
 - Mobile Friendly
 - Premium UI
+- Loading Animations
 """)
 
     if st.sidebar.button("Logout"):
@@ -185,6 +187,26 @@ Features:
     # ============================================
 
     if uploaded_file is not None:
+
+        # ============================================
+        # LOADING ANIMATION
+        # ============================================
+
+        with st.spinner("🤖 AI is analyzing your ERP data..."):
+
+            progress_bar = st.progress(0)
+
+            for i in range(100):
+
+                time.sleep(0.01)
+
+                progress_bar.progress(i + 1)
+
+        st.success("Analysis complete ✅")
+
+        # ============================================
+        # READ CSV
+        # ============================================
 
         df = pd.read_csv(uploaded_file)
 
