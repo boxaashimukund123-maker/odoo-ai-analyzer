@@ -9,19 +9,19 @@ import plotly.express as px
 # ============================================
 
 st.set_page_config(
-    page_title="AI Odoo ERP Analyzer",
+    page_title="AI ERP Analyzer",
     page_icon="🚀",
     layout="wide"
 )
 
 # ============================================
-# PREMIUM CSS
+# CUSTOM CSS
 # ============================================
 
 st.markdown("""
 <style>
 
-/* Main App */
+/* Background */
 .stApp {
     background: linear-gradient(to bottom right, #0E1117, #111827);
     color: white;
@@ -33,14 +33,13 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #30363D;
 }
 
-/* Metric Cards */
+/* Cards */
 div[data-testid="metric-container"] {
-    background: #161B22;
+    background-color: #161B22;
     border: 1px solid #30363D;
     padding: 18px;
-    border-radius: 16px;
+    border-radius: 15px;
     transition: 0.3s ease;
-    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
 }
 
 /* Hover Effect */
@@ -54,8 +53,8 @@ div[data-testid="metric-container"]:hover {
 div.stButton > button {
     background: linear-gradient(to right, #238636, #2EA043);
     color: white;
-    border-radius: 12px;
     border: none;
+    border-radius: 10px;
     padding: 0.6rem 1.2rem;
     font-weight: bold;
 }
@@ -64,15 +63,14 @@ div.stButton > button {
 .stTextInput input {
     background-color: #161B22 !important;
     color: white !important;
-    border-radius: 10px !important;
 }
 
-/* Upload Box */
+/* File Uploader */
 [data-testid="stFileUploader"] {
     background-color: #161B22;
-    border-radius: 15px;
-    padding: 10px;
+    border-radius: 12px;
     border: 1px solid #30363D;
+    padding: 10px;
 }
 
 </style>
@@ -89,24 +87,27 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # ============================================
-# LANDING + LOGIN PAGE
+# LANDING PAGE + LOGIN
 # ============================================
 
 if not st.session_state.logged_in:
 
-    st.markdown("""
-    <div style='text-align:center; padding-top:40px;'>
+    st.markdown(
+        """
+        <div style='text-align:center; padding-top:40px;'>
 
-        <h1 style='font-size:3.5rem;'>
-            🚀 AI ERP ANALYTICS PLATFORM
-        </h1>
+            <h1 style='font-size:3.5rem;'>
+                🚀 AI ERP ANALYTICS PLATFORM
+            </h1>
 
-        <p style='font-size:1.3rem; color:#9CA3AF;'>
-            Smarter business intelligence powered by AI
-        </p>
+            <p style='font-size:1.3rem; color:#9CA3AF;'>
+                Smarter business intelligence powered by AI
+            </p>
 
-    </div>
-    """, unsafe_allow_html=True)
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     st.divider()
 
@@ -117,13 +118,13 @@ if not st.session_state.logged_in:
         st.markdown("## ✨ Platform Features")
 
         st.markdown("""
-        - 📊 Interactive ERP Analytics
-        - 🤖 AI Business Insights
-        - 📈 Smart Forecasting
-        - 🌐 Cloud Hosted Dashboard
-        - 📱 Mobile Optimized UI
-        - ⚡ Premium SaaS Experience
-        """)
+- 📊 Interactive ERP Analytics
+- 🤖 AI Business Insights
+- 📈 Smart Forecasting
+- 🌐 Cloud Hosted Dashboard
+- 📱 Mobile Optimized UI
+- ⚡ Premium SaaS Experience
+""")
 
         st.divider()
 
@@ -151,15 +152,19 @@ if not st.session_state.logged_in:
                 st.error("Invalid username or password ❌")
 
 # ============================================
-# MAIN DASHBOARD
+# MAIN APP
 # ============================================
 
 else:
 
+    # ============================================
+    # SIDEBAR
+    # ============================================
+
     st.sidebar.title("📌 Dashboard")
 
     st.sidebar.info("""
-AI Odoo ERP Analyzer
+AI ERP Analyzer
 
 Features:
 - ERP Analysis
@@ -195,7 +200,7 @@ Features:
     )
 
     # ============================================
-    # ANALYSIS
+    # DATA ANALYSIS
     # ============================================
 
     if uploaded_file is not None:
@@ -219,7 +224,7 @@ Features:
         st.success("Analysis complete ✅")
 
         # ============================================
-        # READ DATA
+        # READ CSV
         # ============================================
 
         df = pd.read_csv(uploaded_file)
@@ -323,7 +328,7 @@ Features:
         st.divider()
 
         # ============================================
-        # FORECAST
+        # AI FORECAST
         # ============================================
 
         st.subheader("📈 AI Forecast")
@@ -341,7 +346,7 @@ Features:
         st.divider()
 
         # ============================================
-        # INSIGHTS
+        # AI INSIGHTS
         # ============================================
 
         st.subheader("🤖 AI Insights")
