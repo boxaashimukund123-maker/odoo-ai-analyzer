@@ -72,8 +72,8 @@ div.stButton > button {
 # LOGIN SYSTEM
 # =========================================
 
-USERNAME = "admin"
-PASSWORD = "password123"
+USERNAME = "a"
+PASSWORD = "a"
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
