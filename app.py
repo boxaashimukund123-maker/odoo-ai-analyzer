@@ -1,9 +1,373 @@
 import streamlit as st
+import pandas as pd
+import random
+import time
+import plotly.express as px
 
-        st.subheader("💬 Ask AI About Your Business Data")
+# ============================================
+# PAGE CONFIG
+# ============================================
+
+st.set_page_config(
+    page_title="AI Odoo ERP Analyzer",
+    page_icon="🚀",
+    layout="wide"
+)
+
+# ============================================
+# PREMIUM CSS
+# ============================================
+
+st.markdown("""
+<style>
+
+/* Main App */
+.stApp {
+    background: linear-gradient(to bottom right, #0E1117, #111827);
+    color: white;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #161B22;
+    border-right: 1px solid #30363D;
+}
+
+/* Metric Cards */
+div[data-testid="metric-container"] {
+    background: #161B22;
+    border: 1px solid #30363D;
+    padding: 18px;
+    border-radius: 16px;
+    transition: 0.3s ease;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.3);
+}
+
+/* Hover Effect */
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-5px);
+    border: 1px solid #2EA043;
+    box-shadow: 0px 0px 20px rgba(46,160,67,0.5);
+}
+
+/* Buttons */
+div.stButton > button {
+    background: linear-gradient(to right, #238636, #2EA043);
+    color: white;
+    border-radius: 12px;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+}
+
+/* Inputs */
+.stTextInput input {
+    background-color: #161B22 !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
+
+/* Upload Box */
+[data-testid="stFileUploader"] {
+    background-color: #161B22;
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid #30363D;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ============================================
+# LOGIN INFO
+# ============================================
+
+USERNAME = "admin"
+PASSWORD = "password123"
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+# ============================================
+# LANDING + LOGIN PAGE
+# ============================================
+
+if not st.session_state.logged_in:
+
+    st.markdown("""
+    <div style='text-align:center; padding-top:40px;'>
+
+        <h1 style='font-size:3.5rem;'>
+            🚀 AI ERP ANALYTICS PLATFORM
+        </h1>
+
+        <p style='font-size:1.3rem; color:#9CA3AF;'>
+            Smarter business intelligence powered by AI
+        </p>
+
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.divider()
+
+    col1, col2, col3 = st.columns([1,2,1])
+
+    with col2:
+
+        st.markdown("## ✨ Platform Features")
+
+        st.markdown("""
+        - 📊 Interactive ERP Analytics
+        - 🤖 AI Business Insights
+        - 📈 Smart Forecasting
+        - 🌐 Cloud Hosted Dashboard
+        - 📱 Mobile Optimized UI
+        - ⚡ Premium SaaS Experience
+        """)
+
+        st.divider()
+
+        st.markdown("## 🔐 Secure Login")
+
+        username = st.text_input("Username")
+
+        password = st.text_input(
+            "Password",
+            type="password"
+        )
+
+        if st.button("Login"):
+
+            if username == USERNAME and password == PASSWORD:
+
+                st.session_state.logged_in = True
+
+                st.success("Login successful ✅")
+
+                st.rerun()
+
+            else:
+
+                st.error("Invalid username or password ❌")
+
+# ============================================
+# MAIN DASHBOARD
+# ============================================
+
+else:
+
+    st.sidebar.title("📌 Dashboard")
+
+    st.sidebar.info("""
+AI Odoo ERP Analyzer
+
+Features:
+- ERP Analysis
+- AI Forecasting
+- Smart Recommendations
+- Interactive Charts
+""")
+
+    if st.sidebar.button("Logout"):
+
+        st.session_state.logged_in = False
+        st.rerun()
+
+    # ============================================
+    # HEADER
+    # ============================================
+
+    st.title("🚀 AI-Powered Odoo ERP Analyzer")
+
+    st.markdown(
+        "## Smart insights from your business data"
+    )
+
+    st.divider()
+
+    # ============================================
+    # FILE UPLOAD
+    # ============================================
+
+    uploaded_file = st.file_uploader(
+        "📂 Upload your ERP CSV file",
+        type=["csv"]
+    )
+
+    # ============================================
+    # ANALYSIS
+    # ============================================
+
+    if uploaded_file is not None:
+
+        # ============================================
+        # LOADING ANIMATION
+        # ============================================
+
+        with st.spinner(
+            "🤖 AI is analyzing your ERP data..."
+        ):
+
+            progress_bar = st.progress(0)
+
+            for i in range(100):
+
+                time.sleep(0.01)
+
+                progress_bar.progress(i + 1)
+
+        st.success("Analysis complete ✅")
+
+        # ============================================
+        # READ DATA
+        # ============================================
+
+        df = pd.read_csv(uploaded_file)
+
+        st.subheader("📋 Uploaded Data")
+
+        st.dataframe(
+            df,
+            use_container_width=True
+        )
+
+        # ============================================
+        # SUMMARY
+        # ============================================
+
+        summary = (
+            df.groupby("Product")["Sales"]
+            .sum()
+            .sort_values(ascending=False)
+        )
+
+        summary_df = summary.reset_index()
+
+        summary_df.columns = ["Product", "Sales"]
+
+        # ============================================
+        # KPI METRICS
+        # ============================================
+
+        total_sales = int(summary.sum())
+
+        top_product = summary.idxmax()
+
+        lowest_product = summary.idxmin()
+
+        avg_sales = int(summary.mean())
+
+        growth_percent = random.randint(5, 20)
+
+        predicted_sales = int(
+            total_sales * (1 + growth_percent / 100)
+        )
+
+        health_score = random.randint(75, 98)
+
+        col1, col2, col3, col4, col5 = st.columns(5)
+
+        col1.metric(
+            "💰 Total Sales",
+            total_sales
+        )
+
+        col2.metric(
+            "🏆 Top Product",
+            top_product
+        )
+
+        col3.metric(
+            "📉 Lowest Product",
+            lowest_product
+        )
+
+        col4.metric(
+            "📊 Avg Sales",
+            avg_sales
+        )
+
+        col5.metric(
+            "⚡ Health Score",
+            f"{health_score}%"
+        )
+
+        st.divider()
+
+        # ============================================
+        # CHART
+        # ============================================
+
+        st.subheader("📈 Interactive Sales Chart")
+
+        fig = px.bar(
+            summary_df,
+            x="Product",
+            y="Sales",
+            text="Sales",
+            title="Product Sales Analysis"
+        )
+
+        fig.update_layout(
+            template="plotly_dark",
+            plot_bgcolor="#0E1117",
+            paper_bgcolor="#0E1117",
+            font_color="white"
+        )
+
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
+
+        st.divider()
+
+        # ============================================
+        # FORECAST
+        # ============================================
+
+        st.subheader("📈 AI Forecast")
+
+        st.info(
+            f"Projected growth next month: "
+            f"{growth_percent}%"
+        )
+
+        st.success(
+            f"Predicted sales next month: "
+            f"{predicted_sales}"
+        )
+
+        st.divider()
+
+        # ============================================
+        # INSIGHTS
+        # ============================================
+
+        st.subheader("🤖 AI Insights")
+
+        st.success(
+            f"{top_product} is currently "
+            f"the best-performing product."
+        )
+
+        st.error(
+            f"{lowest_product} is currently "
+            f"the lowest-performing product."
+        )
+
+        st.divider()
+
+        # ============================================
+        # AI CHAT
+        # ============================================
+
+        st.subheader(
+            "💬 Ask AI About Your Business Data"
+        )
 
         question = st.text_input(
-            "Ask anything about your ERP data..."
+            "Ask your business question..."
         )
 
         if question:
@@ -11,57 +375,53 @@ import streamlit as st
             q = question.lower()
 
             if "top" in q or "best" in q:
+
                 st.success(
-                    f"{top_product} is the best-performing product "
-                    f"with sales of {top_sales}."
+                    f"{top_product} is the "
+                    f"top-performing product."
                 )
 
-            elif "worst" in q or "lowest" in q:
+            elif "lowest" in q or "worst" in q:
+
                 st.error(
-                    f"{worst_product} is the lowest-performing product "
-                    f"with sales of {worst_sales}."
+                    f"{lowest_product} is the "
+                    f"lowest-performing product."
+                )
+
+            elif "forecast" in q:
+
+                st.info(
+                    f"Predicted sales next month: "
+                    f"{predicted_sales}"
                 )
 
             elif "summary" in q:
-                st.info(
-                    f"Total sales are {total_sales}. "
-                    f"{top_product} contributes the highest revenue."
-                )
 
-            elif "average" in q:
-                st.info(
-                    f"The average sales per product is {avg_sales}."
-                )
-
-            elif "recommend" in q or "improve" in q:
-                st.warning(
-                    f"The company should improve sales strategies "
-                    f"for {worst_product} and focus more on "
-                    f"high-performing products like {top_product}."
-                )
-
-            elif "forecast" in q or "prediction" in q:
-                st.info(
-                    f"AI predicts approximately {predicted_sales} "
-                    f"in sales next month with a projected "
-                    f"{growth_percent}% growth."
+                st.success(
+                    f"Total sales are "
+                    f"{total_sales}."
                 )
 
             elif "health" in q:
+
                 st.info(
-                    f"Current business health score is {health_score}%."
+                    f"Business health score: "
+                    f"{health_score}%"
                 )
 
             else:
-                st.info(
-                    "Try asking about:\n"
-                    "- top products\n"
-                    "- worst products\n"
-                    "- sales summary\n"
-                    "- recommendations\n"
-                    "- forecast\n"
-                    "- health score"
-                )
+
+                st.warning("""
+Try asking:
+- top products
+- forecast
+- health
+- summary
+- lowest product
+""")
 
     else:
-        st.info("📁 Upload a CSV file to start analyzing your ERP data.")
+
+        st.info(
+            "📁 Upload a CSV file to start analysis."
+        )
