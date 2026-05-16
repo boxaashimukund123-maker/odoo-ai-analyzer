@@ -4,9 +4,9 @@ import random
 import time
 import plotly.express as px
 
-# ============================================
+# ==================================================
 # PAGE CONFIG
-# ============================================
+# ==================================================
 
 st.set_page_config(
     page_title="AI ERP Analyzer",
@@ -14,14 +14,14 @@ st.set_page_config(
     layout="wide"
 )
 
-# ============================================
+# ==================================================
 # CUSTOM CSS
-# ============================================
+# ==================================================
 
 st.markdown("""
 <style>
 
-/* Background */
+/* Main Background */
 .stApp {
     background: linear-gradient(to bottom right, #0E1117, #111827);
     color: white;
@@ -33,16 +33,16 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #30363D;
 }
 
-/* Cards */
+/* Metric Cards */
 div[data-testid="metric-container"] {
     background-color: #161B22;
     border: 1px solid #30363D;
     padding: 18px;
-    border-radius: 15px;
+    border-radius: 16px;
     transition: 0.3s ease;
 }
 
-/* Hover Effect */
+/* Hover */
 div[data-testid="metric-container"]:hover {
     transform: translateY(-5px);
     border: 1px solid #2EA043;
@@ -54,7 +54,7 @@ div.stButton > button {
     background: linear-gradient(to right, #238636, #2EA043);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 0.6rem 1.2rem;
     font-weight: bold;
 }
@@ -65,7 +65,7 @@ div.stButton > button {
     color: white !important;
 }
 
-/* File Uploader */
+/* Upload Box */
 [data-testid="stFileUploader"] {
     background-color: #161B22;
     border-radius: 12px;
@@ -76,9 +76,9 @@ div.stButton > button {
 </style>
 """, unsafe_allow_html=True)
 
-# ============================================
-# LOGIN INFO
-# ============================================
+# ==================================================
+# LOGIN DATA
+# ==================================================
 
 USERNAME = "admin"
 PASSWORD = "password123"
@@ -86,21 +86,21 @@ PASSWORD = "password123"
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-# ============================================
+# ==================================================
 # LANDING PAGE + LOGIN
-# ============================================
+# ==================================================
 
 if not st.session_state.logged_in:
 
     st.markdown(
         """
-        <div style='text-align:center; padding-top:40px;'>
+        <div style="text-align:center; padding-top:40px;">
 
-            <h1 style='font-size:3.5rem;'>
+            <h1 style="font-size:3.5rem;">
                 🚀 AI ERP ANALYTICS PLATFORM
             </h1>
 
-            <p style='font-size:1.3rem; color:#9CA3AF;'>
+            <p style="font-size:1.3rem; color:#9CA3AF;">
                 Smarter business intelligence powered by AI
             </p>
 
@@ -151,15 +151,15 @@ if not st.session_state.logged_in:
 
                 st.error("Invalid username or password ❌")
 
-# ============================================
+# ==================================================
 # MAIN APP
-# ============================================
+# ==================================================
 
 else:
 
-    # ============================================
+    # ==================================================
     # SIDEBAR
-    # ============================================
+    # ==================================================
 
     st.sidebar.title("📌 Dashboard")
 
@@ -178,9 +178,9 @@ Features:
         st.session_state.logged_in = False
         st.rerun()
 
-    # ============================================
+    # ==================================================
     # HEADER
-    # ============================================
+    # ==================================================
 
     st.title("🚀 AI-Powered Odoo ERP Analyzer")
 
@@ -190,24 +190,24 @@ Features:
 
     st.divider()
 
-    # ============================================
+    # ==================================================
     # FILE UPLOAD
-    # ============================================
+    # ==================================================
 
     uploaded_file = st.file_uploader(
         "📂 Upload your ERP CSV file",
         type=["csv"]
     )
 
-    # ============================================
-    # DATA ANALYSIS
-    # ============================================
+    # ==================================================
+    # ANALYSIS
+    # ==================================================
 
     if uploaded_file is not None:
 
-        # ============================================
+        # ==================================================
         # LOADING ANIMATION
-        # ============================================
+        # ==================================================
 
         with st.spinner(
             "🤖 AI is analyzing your ERP data..."
@@ -223,9 +223,9 @@ Features:
 
         st.success("Analysis complete ✅")
 
-        # ============================================
+        # ==================================================
         # READ CSV
-        # ============================================
+        # ==================================================
 
         df = pd.read_csv(uploaded_file)
 
@@ -236,9 +236,9 @@ Features:
             use_container_width=True
         )
 
-        # ============================================
-        # SUMMARY
-        # ============================================
+        # ==================================================
+        # SALES SUMMARY
+        # ==================================================
 
         summary = (
             df.groupby("Product")["Sales"]
@@ -250,9 +250,9 @@ Features:
 
         summary_df.columns = ["Product", "Sales"]
 
-        # ============================================
+        # ==================================================
         # KPI METRICS
-        # ============================================
+        # ==================================================
 
         total_sales = int(summary.sum())
 
@@ -299,9 +299,9 @@ Features:
 
         st.divider()
 
-        # ============================================
+        # ==================================================
         # CHART
-        # ============================================
+        # ==================================================
 
         st.subheader("📈 Interactive Sales Chart")
 
@@ -327,9 +327,9 @@ Features:
 
         st.divider()
 
-        # ============================================
-        # AI FORECAST
-        # ============================================
+        # ==================================================
+        # FORECAST
+        # ==================================================
 
         st.subheader("📈 AI Forecast")
 
@@ -345,9 +345,9 @@ Features:
 
         st.divider()
 
-        # ============================================
-        # AI INSIGHTS
-        # ============================================
+        # ==================================================
+        # INSIGHTS
+        # ==================================================
 
         st.subheader("🤖 AI Insights")
 
@@ -363,9 +363,9 @@ Features:
 
         st.divider()
 
-        # ============================================
+        # ==================================================
         # AI CHAT
-        # ============================================
+        # ==================================================
 
         st.subheader(
             "💬 Ask AI About Your Business Data"
