@@ -1,14 +1,18 @@
 import streamlit as st
 
+# =====================================
+# PAGE CONFIG
+# =====================================
+
 st.set_page_config(
     page_title="AI ERP Platform",
     page_icon="🚀",
     layout="wide"
 )
 
-# =========================
+# =====================================
 # CUSTOM CSS
-# =========================
+# =====================================
 
 st.markdown("""
 <style>
@@ -18,7 +22,7 @@ st.markdown("""
     color: white;
 }
 
-.main-box {
+.hero-box {
     background-color: #161B22;
     padding: 60px;
     border-radius: 25px;
@@ -27,59 +31,47 @@ st.markdown("""
     border: 1px solid #30363D;
 }
 
-.feature-card {
+.feature-box {
     background-color: #161B22;
     padding: 30px;
     border-radius: 20px;
     border: 1px solid #30363D;
     text-align: center;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
-.feature-card:hover {
+.feature-box:hover {
     transform: translateY(-8px);
     border: 1px solid #2EA043;
     box-shadow: 0px 0px 20px rgba(46,160,67,0.4);
 }
 
-.big-text {
-    font-size: 3.8rem;
-    font-weight: bold;
-}
-
-.small-text {
-    font-size: 1.3rem;
-    color: #9CA3AF;
-}
-
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
+# =====================================
 # HERO SECTION
-# =========================
+# =====================================
 
 st.markdown("""
-<div class="main-box">
+<div class="hero-box">
 
-    <div class="big-text">
+    <h1 style="font-size:4rem;">
         🚀 AI ERP ANALYTICS PLATFORM
-    </div>
+    </h1>
 
-    <br>
-
-    <div class="small-text">
+    <p style="font-size:1.4rem; color:#9CA3AF;">
         Smarter business intelligence powered by AI
-    </div>
+    </p>
 
 </div>
 """, unsafe_allow_html=True)
 
-st.write("")
+st.markdown("")
 
-# =========================
+# =====================================
 # FEATURES
-# =========================
+# =====================================
 
 st.markdown("## ✨ Platform Features")
 
@@ -87,42 +79,43 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
-    <div class="feature-card">
+    <div class="feature-box">
         <h2>📊 Analytics</h2>
-        <p>Powerful ERP data insights and reports.</p>
+        <p>Powerful ERP business insights.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
-    <div class="feature-card">
+    <div class="feature-box">
         <h2>🤖 AI Forecasting</h2>
-        <p>Predict sales and business growth instantly.</p>
+        <p>Predict future growth instantly.</p>
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
-    <div class="feature-card">
+    <div class="feature-box">
         <h2>⚡ Smart Insights</h2>
-        <p>AI-generated recommendations for your business.</p>
+        <p>AI recommendations for your ERP.</p>
     </div>
     """, unsafe_allow_html=True)
 
-st.write("")
-st.write("")
+st.markdown("")
 
-# =========================
+# =====================================
 # CTA SECTION
-# =========================
+# =====================================
 
 st.markdown("""
-<div class="main-box">
+<div class="hero-box">
 
-    <h1>🌐 Cloud Hosted ERP Intelligence</h1>
+    <h1>
+        🌐 Cloud Hosted ERP Intelligence
+    </h1>
 
-    <p class="small-text">
-        Built with Streamlit + AI + Modern Analytics
+    <p style="font-size:1.2rem; color:#9CA3AF;">
+        Built with Streamlit + AI + Modern UI
     </p>
 
 </div>
