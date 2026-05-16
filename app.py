@@ -1,8 +1,8 @@
 import streamlit as st
 
-# =====================================
+# =========================================
 # PAGE CONFIG
-# =====================================
+# =========================================
 
 st.set_page_config(
     page_title="AI ERP Platform",
@@ -10,9 +10,9 @@ st.set_page_config(
     layout="wide"
 )
 
-# =====================================
+# =========================================
 # CUSTOM CSS
-# =====================================
+# =========================================
 
 st.markdown("""
 <style>
@@ -22,18 +22,9 @@ st.markdown("""
     color: white;
 }
 
-.hero-box {
-    background-color: #161B22;
-    padding: 60px;
-    border-radius: 25px;
-    text-align: center;
-    margin-top: 40px;
-    border: 1px solid #30363D;
-}
-
 .feature-box {
     background-color: #161B22;
-    padding: 30px;
+    padding: 35px;
     border-radius: 20px;
     border: 1px solid #30363D;
     text-align: center;
@@ -49,31 +40,23 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================
+# =========================================
 # HERO SECTION
-# =====================================
+# =========================================
 
-st.markdown("""
-<div class="hero-box">
+st.title("🚀 AI ERP ANALYTICS PLATFORM")
 
-    <h1 style="font-size:4rem;">
-        🚀 AI ERP ANALYTICS PLATFORM
-    </h1>
+st.subheader(
+    "Smarter business intelligence powered by AI"
+)
 
-    <p style="font-size:1.4rem; color:#9CA3AF;">
-        Smarter business intelligence powered by AI
-    </p>
+st.markdown("---")
 
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("")
-
-# =====================================
+# =========================================
 # FEATURES
-# =====================================
+# =========================================
 
-st.markdown("## ✨ Platform Features")
+st.header("✨ Platform Features")
 
 col1, col2, col3 = st.columns(3)
 
@@ -103,20 +86,18 @@ with col3:
 
 st.markdown("")
 
-# =====================================
-# CTA SECTION
-# =====================================
+# =========================================
+# ABOUT SECTION
+# =========================================
 
-st.markdown("""
-<div class="hero-box">
+st.markdown("---")
 
-    <h1>
-        🌐 Cloud Hosted ERP Intelligence
-    </h1>
+st.header("🌐 Cloud Hosted ERP Intelligence")
 
-    <p style="font-size:1.2rem; color:#9CA3AF;">
-        Built with Streamlit + AI + Modern UI
-    </p>
+st.write(
+    "Built with Streamlit + AI + Modern UI"
+)
 
-</div>
-""", unsafe_allow_html=True)
+st.info(
+    "Your ERP dashboard is now live online 🚀"
+)
