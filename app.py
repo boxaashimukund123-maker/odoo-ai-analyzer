@@ -34,6 +34,8 @@ st.markdown("""
     padding-right: 3rem;
 }
 
+/* HERO */
+
 .hero {
     text-align: center;
     padding: 90px 40px;
@@ -62,11 +64,15 @@ st.markdown("""
     color: #9CA3AF;
 }
 
+/* TITLES */
+
 .section-title {
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 25px;
 }
+
+/* CARDS */
 
 .card {
     background: rgba(17,24,39,0.7);
@@ -85,6 +91,8 @@ st.markdown("""
     box-shadow: 0px 0px 30px rgba(88,166,255,0.25);
 }
 
+/* STATS */
+
 .stat-card {
     background: rgba(17,24,39,0.7);
     padding: 40px;
@@ -92,6 +100,8 @@ st.markdown("""
     text-align: center;
     border: 1px solid rgba(255,255,255,0.08);
 }
+
+/* PRICING */
 
 .price-card {
     background: rgba(17,24,39,0.75);
@@ -107,6 +117,8 @@ st.markdown("""
     border: 1px solid #2EA043;
     box-shadow: 0px 0px 25px rgba(46,160,67,0.3);
 }
+
+/* BUTTON */
 
 div.stButton > button {
     width: 100%;
@@ -129,6 +141,8 @@ div.stButton > button:hover {
     box-shadow: 0px 0px 25px rgba(46,160,67,0.45);
 }
 
+/* ANIMATION */
+
 @keyframes fadeIn {
 
     from {
@@ -146,7 +160,7 @@ div.stButton > button:hover {
 """, unsafe_allow_html=True)
 
 # =========================================
-# HERO
+# HERO SECTION
 # =========================================
 
 st.markdown("""
