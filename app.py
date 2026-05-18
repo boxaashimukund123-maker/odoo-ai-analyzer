@@ -1,8 +1,4 @@
 import streamlit as st
-import pandas as pd
-import plotly.express as px
-import random
-import time
 
 # =========================================
 # PAGE CONFIG
@@ -15,316 +11,343 @@ st.set_page_config(
 )
 
 # =========================================
-# CUSTOM CSS
+# PREMIUM CSS
 # =========================================
 
 st.markdown("""
 <style>
 
+/* Main Background */
 .stApp {
-    background: linear-gradient(to bottom right, #0B1120, #111827);
+    background: linear-gradient(
+        135deg,
+        #0B1120,
+        #111827,
+        #0F172A
+    );
     color: white;
+    overflow-x: hidden;
 }
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background-color: #161B22;
-}
-
-/* Feature Boxes */
-.feature-box {
-    background-color: #161B22;
-    padding: 35px;
-    border-radius: 20px;
-    border: 1px solid #30363D;
+/* Hero Box */
+.hero-box {
+    padding: 80px;
+    border-radius: 35px;
     text-align: center;
-    transition: 0.3s ease;
+    margin-top: 40px;
+    background: rgba(22, 27, 34, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    animation: fadeIn 1s ease-in-out;
 }
 
-.feature-box:hover {
-    transform: translateY(-8px);
-    border: 1px solid #2EA043;
-    box-shadow: 0px 0px 20px rgba(46,160,67,0.4);
+/* Big Title */
+.big-title {
+    font-size: 5rem;
+    font-weight: 800;
+    background: linear-gradient(
+        to right,
+        #2EA043,
+        #58A6FF
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Metric Cards */
-div[data-testid="metric-container"] {
-    background-color: #161B22;
-    border: 1px solid #30363D;
-    padding: 18px;
-    border-radius: 15px;
+/* Subtitle */
+.subtitle {
+    font-size: 1.5rem;
+    color: #9CA3AF;
+    margin-top: 20px;
 }
 
 /* Buttons */
 div.stButton > button {
-    background: linear-gradient(to right, #238636, #2EA043);
+    background: linear-gradient(
+        to right,
+        #238636,
+        #2EA043
+    );
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 0.6rem 1.2rem;
+    border-radius: 14px;
+    padding: 0.8rem 1.6rem;
     font-weight: bold;
+    font-size: 1rem;
+    transition: 0.3s ease;
+}
+
+/* Button Hover */
+div.stButton > button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 0px 25px rgba(46,160,67,0.5);
+}
+
+/* Feature Cards */
+.feature-card {
+    background: rgba(22, 27, 34, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.3s ease;
+    height: 240px;
+}
+
+/* Hover Animation */
+.feature-card:hover {
+    transform: translateY(-10px);
+    border: 1px solid #2EA043;
+    box-shadow: 0px 0px 30px rgba(46,160,67,0.35);
+}
+
+/* Stats Box */
+.stats-box {
+    background: rgba(22,27,34,0.7);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Pricing Cards */
+.pricing-card {
+    background: rgba(22,27,34,0.75);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: scale(1.03);
+    border: 1px solid #58A6FF;
+    box-shadow: 0px 0px 30px rgba(88,166,255,0.3);
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # =========================================
-# LOGIN SYSTEM
+# HERO SECTION
 # =========================================
 
-USERNAME = "a"
-PASSWORD = "a"
+st.markdown("""
+<div class="hero-box">
 
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
+    <div class="big-title">
+        AI ERP PLATFORM
+    </div>
 
-# =========================================
-# LANDING PAGE
-# =========================================
+    <div class="subtitle">
+        Smarter business intelligence powered by AI
+    </div>
 
-if not st.session_state.logged_in:
+</div>
+""", unsafe_allow_html=True)
 
-    st.title("🚀 AI ERP ANALYTICS PLATFORM")
-
-    st.subheader(
-        "Smarter business intelligence powered by AI"
-    )
-
-    st.markdown("---")
-
-    st.header("✨ Platform Features")
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.markdown("""
-        <div class="feature-box">
-            <h2>📊 Analytics</h2>
-            <p>Powerful ERP business insights.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col2:
-        st.markdown("""
-        <div class="feature-box">
-            <h2>🤖 AI Forecasting</h2>
-            <p>Predict future growth instantly.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with col3:
-        st.markdown("""
-        <div class="feature-box">
-            <h2>⚡ Smart Insights</h2>
-            <p>AI recommendations for your ERP.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("")
-
-    st.markdown("---")
-
-    st.header("🔐 Login")
-
-    username = st.text_input("Username")
-
-    password = st.text_input(
-        "Password",
-        type="password"
-    )
-
-    if st.button("Launch Dashboard"):
-
-        if username == USERNAME and password == PASSWORD:
-
-            st.session_state.logged_in = True
-
-            st.success("Login successful ✅")
-
-            st.rerun()
-
-        else:
-
-            st.error("Invalid username or password ❌")
+st.write("")
 
 # =========================================
-# MAIN DASHBOARD
+# BUTTONS
 # =========================================
 
-else:
+col1, col2, col3 = st.columns([1,1,1])
 
-    st.sidebar.title("📌 Dashboard")
+with col2:
+    st.button("🚀 Launch Platform")
 
-    if st.sidebar.button("Logout"):
+st.write("")
+st.write("")
 
-        st.session_state.logged_in = False
-        st.rerun()
+# =========================================
+# FEATURES
+# =========================================
 
-    st.title("📊 ERP Dashboard")
+st.header("✨ Platform Features")
 
-    uploaded_file = st.file_uploader(
-        "📂 Upload CSV File",
-        type=["csv"]
-    )
+col1, col2, col3 = st.columns(3)
 
-    if uploaded_file is not None:
+with col1:
 
-        with st.spinner(
-            "🤖 AI is analyzing your ERP data..."
-        ):
+    st.markdown("""
+    <div class="feature-card">
 
-            progress_bar = st.progress(0)
+        <h2>📊 Analytics</h2>
 
-            for i in range(100):
+        <p>
+        Advanced ERP analytics with
+        real-time business insights.
+        </p>
 
-                time.sleep(0.01)
+    </div>
+    """, unsafe_allow_html=True)
 
-                progress_bar.progress(i + 1)
+with col2:
 
-        st.success("Analysis complete ✅")
+    st.markdown("""
+    <div class="feature-card">
 
-        df = pd.read_csv(uploaded_file)
+        <h2>🤖 AI Forecasting</h2>
 
-        st.subheader("📋 Uploaded Data")
+        <p>
+        Predict future business growth
+        using AI-powered forecasting.
+        </p>
 
-        st.dataframe(df, use_container_width=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-        # =========================================
-        # SALES SUMMARY
-        # =========================================
+with col3:
 
-        summary = (
-            df.groupby("Product")["Sales"]
-            .sum()
-            .sort_values(ascending=False)
-        )
+    st.markdown("""
+    <div class="feature-card">
 
-        summary_df = summary.reset_index()
+        <h2>⚡ Smart Insights</h2>
 
-        summary_df.columns = ["Product", "Sales"]
+        <p>
+        AI-generated recommendations
+        for faster decision making.
+        </p>
 
-        total_sales = int(summary.sum())
+    </div>
+    """, unsafe_allow_html=True)
 
-        top_product = summary.idxmax()
+st.write("")
+st.write("")
 
-        lowest_product = summary.idxmin()
+# =========================================
+# STATS SECTION
+# =========================================
 
-        avg_sales = int(summary.mean())
+st.header("📈 Trusted Worldwide")
 
-        growth_percent = random.randint(5, 20)
+col1, col2, col3, col4 = st.columns(4)
 
-        predicted_sales = int(
-            total_sales * (1 + growth_percent / 100)
-        )
+with col1:
+    st.markdown("""
+    <div class="stats-box">
+        <h1>10K+</h1>
+        <p>Businesses</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        col1, col2, col3, col4 = st.columns(4)
+with col2:
+    st.markdown("""
+    <div class="stats-box">
+        <h1>99.9%</h1>
+        <p>Uptime</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        col1.metric(
-            "💰 Total Sales",
-            total_sales
-        )
+with col3:
+    st.markdown("""
+    <div class="stats-box">
+        <h1>1M+</h1>
+        <p>Reports Generated</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        col2.metric(
-            "🏆 Top Product",
-            top_product
-        )
+with col4:
+    st.markdown("""
+    <div class="stats-box">
+        <h1>24/7</h1>
+        <p>AI Monitoring</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-        col3.metric(
-            "📉 Lowest Product",
-            lowest_product
-        )
+st.write("")
+st.write("")
 
-        col4.metric(
-            "📈 Growth",
-            f"{growth_percent}%"
-        )
+# =========================================
+# PRICING
+# =========================================
 
-        st.markdown("---")
+st.header("💎 Pricing")
 
-        # =========================================
-        # CHART
-        # =========================================
+col1, col2, col3 = st.columns(3)
 
-        st.subheader("📈 Sales Analytics")
+with col1:
 
-        fig = px.bar(
-            summary_df,
-            x="Product",
-            y="Sales",
-            text="Sales",
-            title="Product Sales"
-        )
+    st.markdown("""
+    <div class="pricing-card">
 
-        fig.update_layout(
-            template="plotly_dark",
-            plot_bgcolor="#0B1120",
-            paper_bgcolor="#0B1120",
-            font_color="white"
-        )
+        <h2>Starter</h2>
 
-        st.plotly_chart(
-            fig,
-            use_container_width=True
-        )
+        <h1>$9</h1>
 
-        st.markdown("---")
+        <p>Basic analytics</p>
+        <p>AI insights</p>
+        <p>1 dashboard</p>
 
-        # =========================================
-        # AI INSIGHTS
-        # =========================================
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.subheader("🤖 AI Insights")
+with col2:
 
-        st.success(
-            f"{top_product} is the best-performing product."
-        )
+    st.markdown("""
+    <div class="pricing-card">
 
-        st.error(
-            f"{lowest_product} is the lowest-performing product."
-        )
+        <h2>Pro</h2>
 
-        st.info(
-            f"Predicted next month sales: {predicted_sales}"
-        )
+        <h1>$49</h1>
 
-        # =========================================
-        # AI CHAT
-        # =========================================
+        <p>Advanced AI</p>
+        <p>Unlimited dashboards</p>
+        <p>Forecasting tools</p>
 
-        st.markdown("---")
+    </div>
+    """, unsafe_allow_html=True)
 
-        st.subheader(
-            "💬 Ask AI About Your Data"
-        )
+with col3:
 
-        question = st.text_input(
-            "Ask a business question..."
-        )
+    st.markdown("""
+    <div class="pricing-card">
 
-        if question:
+        <h2>Enterprise</h2>
 
-            q = question.lower()
+        <h1>$199</h1>
 
-            if "top" in q:
+        <p>Custom AI solutions</p>
+        <p>Priority support</p>
+        <p>Unlimited everything</p>
 
-                st.success(
-                    f"{top_product} is your top product."
-                )
+    </div>
+    """, unsafe_allow_html=True)
 
-            elif "lowest" in q:
+st.write("")
+st.write("")
 
-                st.error(
-                    f"{lowest_product} is underperforming."
-                )
+# =========================================
+# FOOTER
+# =========================================
 
-            elif "forecast" in q:
+st.markdown("---")
 
-                st.info(
-                    f"Forecasted sales: {predicted_sales}"
-                )
+st.markdown("""
+<center>
 
-            else:
+<h3>🌐 AI ERP PLATFORM</h3>
 
-                st.warning(
-                    "Try asking about top products, forecasts, or trends."
-                )
+<p style="color:#9CA3AF;">
+Built with AI + Streamlit + Modern SaaS Design
+</p>
+
+</center>
+""", unsafe_allow_html=True)
