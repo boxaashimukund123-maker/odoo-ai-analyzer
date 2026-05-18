@@ -290,26 +290,67 @@ if st.session_state.get("page") == "analyzer":
 
         st.dataframe(df)
 
+        # =========================
+        # LIVE CHARTS
+        # =========================
+
+        st.subheader("📈 Auto Charts")
+
+        numeric_cols = df.select_dtypes(
+            include="number"
+        ).columns
+
+        if len(numeric_cols) > 0:
+
+            selected_col = st.selectbox(
+                "Choose a column",
+                numeric_cols
+            )
+
+            st.line_chart(df[selected_col])
+
+            st.bar_chart(df[selected_col])
+
+        else:
+            st.warning(
+                "No numeric columns available for charts."
+            )
+
+        # =========================
+        # DATASET INFO
+        # =========================
+
         st.subheader("📈 Dataset Info")
 
         c1, c2, c3 = st.columns(3)
 
         c1.metric("Rows", len(df))
         c2.metric("Columns", len(df.columns))
-        c3.metric("Missing Values", df.isnull().sum().sum())
+        c3.metric(
+            "Missing Values",
+            df.isnull().sum().sum()
+        )
+
+        # =========================
+        # AI INSIGHTS
+        # =========================
 
         st.subheader("🧠 AI Insights")
 
-        numeric_cols = df.select_dtypes(include="number")
+        numeric_df = df.select_dtypes(
+            include="number"
+        )
 
-        if not numeric_cols.empty:
+        if not numeric_df.empty:
 
             st.dataframe(
-                numeric_cols.describe().round(2)
+                numeric_df.describe().round(2)
             )
 
         else:
-            st.warning("No numeric columns found.")
+            st.warning(
+                "No numeric columns found."
+            )
 
 # =========================
 # FEATURES
