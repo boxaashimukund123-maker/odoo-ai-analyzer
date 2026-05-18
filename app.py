@@ -8,18 +8,109 @@ st.set_page_config(
 )
 
 # =========================
-# CUSTOM CSS
+# CSS + ANIMATIONS
 # =========================
 
 st.markdown("""
 <style>
 
 .stApp {
-    background: linear-gradient(135deg, #020617, #00113a);
+    background: linear-gradient(
+        -45deg,
+        #020617,
+        #00113a,
+        #0f172a,
+        #111827
+    );
+
+    background-size: 400% 400%;
+
+    animation: gradientMove 12s ease infinite;
+
     color: white;
 }
 
-/* HERO ANIMATION LINE */
+/* ANIMATED BACKGROUND */
+
+@keyframes gradientMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* FLOATING PARTICLES */
+
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(59,130,246,0.7);
+    border-radius: 50%;
+    animation: float 15s linear infinite;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-duration: 10s;
+}
+
+.particle:nth-child(2) {
+    left: 25%;
+    animation-duration: 14s;
+}
+
+.particle:nth-child(3) {
+    left: 40%;
+    animation-duration: 18s;
+}
+
+.particle:nth-child(4) {
+    left: 60%;
+    animation-duration: 12s;
+}
+
+.particle:nth-child(5) {
+    left: 80%;
+    animation-duration: 20s;
+}
+
+@keyframes float {
+
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* HERO LINE */
 
 .hero-line {
     width: 100%;
@@ -66,6 +157,11 @@ st.markdown("""
     color: white;
     font-size: 18px;
     font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
 }
 
 .blue {
@@ -80,30 +176,71 @@ st.markdown("""
     background: linear-gradient(135deg, #713f12, #422006);
 }
 
-/* BUTTON */
+/* GLOW BUTTON */
 
 .stButton > button {
+
     width: 100%;
+
     border-radius: 14px;
+
     padding: 14px;
+
     font-size: 18px;
+
     font-weight: bold;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+
     color: white;
+
     border: none;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    box-shadow:
+        0px 0px 15px rgba(37,99,235,0.35);
+
+    transition: 0.3s ease;
 }
 
 .stButton > button:hover {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    transform: scale(1.02);
-    transition: 0.2s ease;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0px 0px 35px rgba(59,130,246,0.75);
+
+    background: linear-gradient(
+        135deg,
+        #3b82f6,
+        #2563eb
+    );
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # =========================
-# HERO SECTION
+# PARTICLES
+# =========================
+
+st.markdown("""
+<div class="particles">
+
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+
+</div>
+""", unsafe_allow_html=True)
+
+# =========================
+# HERO
 # =========================
 
 st.title("🚀 AI ERP PLATFORM")
@@ -129,7 +266,7 @@ with col2:
         st.session_state.page = "analyzer"
 
 # =========================
-# ANALYZER PAGE
+# ANALYZER
 # =========================
 
 if st.session_state.get("page") == "analyzer":
@@ -167,16 +304,8 @@ if st.session_state.get("page") == "analyzer":
 
         if not numeric_cols.empty:
 
-            st.write("Average values")
-
             st.dataframe(
-                numeric_cols.mean().round(2)
-            )
-
-            st.write("Maximum values")
-
-            st.dataframe(
-                numeric_cols.max()
+                numeric_cols.describe().round(2)
             )
 
         else:
