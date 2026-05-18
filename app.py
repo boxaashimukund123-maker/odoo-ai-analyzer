@@ -1,3 +1,4 @@
+cat > app.py << 'EOF'
 import streamlit as st
 
 # =========================================
@@ -17,7 +18,6 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Background */
 .stApp {
     background: linear-gradient(
         135deg,
@@ -28,14 +28,12 @@ st.markdown("""
     color: white;
 }
 
-/* Remove Streamlit Padding */
 .block-container {
     padding-top: 2rem;
     padding-left: 3rem;
     padding-right: 3rem;
 }
 
-/* Hero Section */
 .hero {
     text-align: center;
     padding: 90px 40px;
@@ -46,7 +44,6 @@ st.markdown("""
     animation: fadeIn 1s ease;
 }
 
-/* Big Gradient Title */
 .hero-title {
     font-size: 5rem;
     font-weight: 800;
@@ -60,20 +57,17 @@ st.markdown("""
     margin-bottom: 20px;
 }
 
-/* Subtitle */
 .hero-subtitle {
     font-size: 1.4rem;
     color: #9CA3AF;
 }
 
-/* Section Titles */
 .section-title {
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 25px;
 }
 
-/* Cards */
 .card {
     background: rgba(17,24,39,0.7);
     backdrop-filter: blur(10px);
@@ -85,14 +79,12 @@ st.markdown("""
     height: 230px;
 }
 
-/* Hover */
 .card:hover {
     transform: translateY(-10px);
     border: 1px solid #58A6FF;
     box-shadow: 0px 0px 30px rgba(88,166,255,0.25);
 }
 
-/* Stats Cards */
 .stat-card {
     background: rgba(17,24,39,0.7);
     padding: 40px;
@@ -101,7 +93,6 @@ st.markdown("""
     border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* Pricing */
 .price-card {
     background: rgba(17,24,39,0.75);
     padding: 40px;
@@ -117,7 +108,6 @@ st.markdown("""
     box-shadow: 0px 0px 25px rgba(46,160,67,0.3);
 }
 
-/* Buttons */
 div.stButton > button {
     width: 100%;
     background: linear-gradient(
@@ -139,7 +129,6 @@ div.stButton > button:hover {
     box-shadow: 0px 0px 25px rgba(46,160,67,0.45);
 }
 
-/* Fade Animation */
 @keyframes fadeIn {
 
     from {
@@ -349,3 +338,5 @@ st.markdown("""
 
 </div>
 """, unsafe_allow_html=True)
+
+EOF
