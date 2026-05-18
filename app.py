@@ -8,7 +8,102 @@ st.set_page_config(
 )
 
 # =========================
-# HOME PAGE
+# CUSTOM CSS
+# =========================
+
+st.markdown("""
+<style>
+
+.stApp {
+    background: linear-gradient(135deg, #020617, #00113a);
+    color: white;
+}
+
+/* HERO ANIMATION LINE */
+
+.hero-line {
+    width: 100%;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+    margin-top: 25px;
+    margin-bottom: 45px;
+}
+
+.hero-line::before {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #3b82f6,
+        transparent
+    );
+
+    animation: slide 2s linear infinite;
+}
+
+@keyframes slide {
+
+    0% {
+        transform: translateX(-150%);
+    }
+
+    100% {
+        transform: translateX(350%);
+    }
+}
+
+/* FEATURE CARDS */
+
+.feature-card {
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.blue {
+    background: linear-gradient(135deg, #1e3a8a, #0f172a);
+}
+
+.green {
+    background: linear-gradient(135deg, #14532d, #052e16);
+}
+
+.yellow {
+    background: linear-gradient(135deg, #713f12, #422006);
+}
+
+/* BUTTON */
+
+.stButton > button {
+    width: 100%;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    border: none;
+}
+
+.stButton > button:hover {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    transform: scale(1.02);
+    transition: 0.2s ease;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# =========================
+# HERO SECTION
 # =========================
 
 st.title("🚀 AI ERP PLATFORM")
@@ -17,11 +112,19 @@ st.subheader(
     "Smarter business intelligence powered by AI"
 )
 
-st.divider()
+st.markdown(
+    '<div class="hero-line"></div>',
+    unsafe_allow_html=True
+)
+
+# =========================
+# BUTTON
+# =========================
 
 col1, col2, col3 = st.columns([1,1,1])
 
 with col2:
+
     if st.button("🚀 Launch Platform"):
         st.session_state.page = "analyzer"
 
@@ -44,9 +147,10 @@ if st.session_state.get("page") == "analyzer":
 
         df = pd.read_csv(uploaded_file)
 
-        st.success("File uploaded successfully!")
+        st.success("CSV uploaded successfully!")
 
         st.subheader("📄 Data Preview")
+
         st.dataframe(df)
 
         st.subheader("📈 Dataset Info")
@@ -63,13 +167,13 @@ if st.session_state.get("page") == "analyzer":
 
         if not numeric_cols.empty:
 
-            st.write("Average values:")
+            st.write("Average values")
 
             st.dataframe(
                 numeric_cols.mean().round(2)
             )
 
-            st.write("Maximum values:")
+            st.write("Maximum values")
 
             st.dataframe(
                 numeric_cols.max()
@@ -87,28 +191,34 @@ st.write("")
 
 st.header("✨ Platform Features")
 
-col1, col2, col3 = st.columns(3)
+c1, c2, c3 = st.columns(3)
 
-with col1:
-    st.info("""
-📊 Analytics
+with c1:
 
-Advanced ERP analytics with real-time business insights.
-""")
+    st.markdown("""
+    <div class="feature-card blue">
+    📊 Analytics<br><br>
+    Advanced ERP analytics with real-time business insights.
+    </div>
+    """, unsafe_allow_html=True)
 
-with col2:
-    st.success("""
-🤖 AI Forecasting
+with c2:
 
-Predict future growth with AI.
-""")
+    st.markdown("""
+    <div class="feature-card green">
+    🤖 AI Forecasting<br><br>
+    Predict future growth with AI.
+    </div>
+    """, unsafe_allow_html=True)
 
-with col3:
-    st.warning("""
-⚡ Smart Insights
+with c3:
 
-AI recommendations for ERP systems.
-""")
+    st.markdown("""
+    <div class="feature-card yellow">
+    ⚡ Smart Insights<br><br>
+    AI recommendations for ERP systems.
+    </div>
+    """, unsafe_allow_html=True)
 
 # =========================
 # STATS
@@ -119,12 +229,12 @@ st.write("")
 
 st.header("📈 Trusted Worldwide")
 
-c1, c2, c3, c4 = st.columns(4)
+s1, s2, s3, s4 = st.columns(4)
 
-c1.metric("Businesses", "10K+")
-c2.metric("Uptime", "99.9%")
-c3.metric("Reports", "1M+")
-c4.metric("Monitoring", "24/7")
+s1.metric("Businesses", "10K+")
+s2.metric("Uptime", "99.9%")
+s3.metric("Reports", "1M+")
+s4.metric("Monitoring", "24/7")
 
 # =========================
 # PRICING
