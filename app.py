@@ -17,32 +17,37 @@ st.set_page_config(
 st.markdown("""
 <style>
 
-/* Main Background */
+/* Background */
 .stApp {
     background: linear-gradient(
         135deg,
-        #0B1120,
-        #111827,
-        #0F172A
+        #020617,
+        #0F172A,
+        #111827
     );
     color: white;
-    overflow-x: hidden;
 }
 
-/* Hero Box */
-.hero-box {
-    padding: 80px;
-    border-radius: 35px;
+/* Remove Streamlit Padding */
+.block-container {
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+/* Hero Section */
+.hero {
     text-align: center;
-    margin-top: 40px;
-    background: rgba(22, 27, 34, 0.7);
+    padding: 90px 40px;
+    border-radius: 35px;
+    background: rgba(17, 24, 39, 0.65);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    animation: fadeIn 1s ease-in-out;
+    border: 1px solid rgba(255,255,255,0.08);
+    animation: fadeIn 1s ease;
 }
 
-/* Big Title */
-.big-title {
+/* Big Gradient Title */
+.hero-title {
     font-size: 5rem;
     font-weight: 800;
     background: linear-gradient(
@@ -52,17 +57,69 @@ st.markdown("""
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
 }
 
 /* Subtitle */
-.subtitle {
-    font-size: 1.5rem;
+.hero-subtitle {
+    font-size: 1.4rem;
     color: #9CA3AF;
-    margin-top: 20px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Cards */
+.card {
+    background: rgba(17,24,39,0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.3s ease;
+    height: 230px;
+}
+
+/* Hover */
+.card:hover {
+    transform: translateY(-10px);
+    border: 1px solid #58A6FF;
+    box-shadow: 0px 0px 30px rgba(88,166,255,0.25);
+}
+
+/* Stats Cards */
+.stat-card {
+    background: rgba(17,24,39,0.7);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Pricing */
+.price-card {
+    background: rgba(17,24,39,0.75);
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.price-card:hover {
+    transform: scale(1.03);
+    border: 1px solid #2EA043;
+    box-shadow: 0px 0px 25px rgba(46,160,67,0.3);
 }
 
 /* Buttons */
 div.stButton > button {
+    width: 100%;
     background: linear-gradient(
         to right,
         #238636,
@@ -71,60 +128,15 @@ div.stButton > button {
     color: white;
     border: none;
     border-radius: 14px;
-    padding: 0.8rem 1.6rem;
-    font-weight: bold;
+    padding: 0.8rem 1rem;
     font-size: 1rem;
+    font-weight: bold;
     transition: 0.3s ease;
 }
 
-/* Button Hover */
 div.stButton > button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 25px rgba(46,160,67,0.5);
-}
-
-/* Feature Cards */
-.feature-card {
-    background: rgba(22, 27, 34, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 35px;
-    border-radius: 25px;
-    text-align: center;
-    transition: 0.3s ease;
-    height: 240px;
-}
-
-/* Hover Animation */
-.feature-card:hover {
-    transform: translateY(-10px);
-    border: 1px solid #2EA043;
-    box-shadow: 0px 0px 30px rgba(46,160,67,0.35);
-}
-
-/* Stats Box */
-.stats-box {
-    background: rgba(22,27,34,0.7);
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* Pricing Cards */
-.pricing-card {
-    background: rgba(22,27,34,0.75);
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: 0.3s ease;
-}
-
-.pricing-card:hover {
     transform: scale(1.03);
-    border: 1px solid #58A6FF;
-    box-shadow: 0px 0px 30px rgba(88,166,255,0.3);
+    box-shadow: 0px 0px 25px rgba(46,160,67,0.45);
 }
 
 /* Fade Animation */
@@ -145,17 +157,17 @@ div.stButton > button:hover {
 """, unsafe_allow_html=True)
 
 # =========================================
-# HERO SECTION
+# HERO
 # =========================================
 
 st.markdown("""
-<div class="hero-box">
+<div class="hero">
 
-    <div class="big-title">
-        AI ERP PLATFORM
+    <div class="hero-title">
+        🚀 AI ERP PLATFORM
     </div>
 
-    <div class="subtitle">
+    <div class="hero-subtitle">
         Smarter business intelligence powered by AI
     </div>
 
@@ -163,9 +175,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.write("")
+st.write("")
 
 # =========================================
-# BUTTONS
+# BUTTON
 # =========================================
 
 col1, col2, col3 = st.columns([1,1,1])
@@ -180,52 +193,46 @@ st.write("")
 # FEATURES
 # =========================================
 
-st.header("✨ Platform Features")
+st.markdown(
+    '<div class="section-title">✨ Platform Features</div>',
+    unsafe_allow_html=True
+)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-
     st.markdown("""
-    <div class="feature-card">
-
-        <h2>📊 Analytics</h2>
-
+    <div class="card">
+        <h1>📊</h1>
+        <h2>Analytics</h2>
         <p>
         Advanced ERP analytics with
         real-time business insights.
         </p>
-
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
-
     st.markdown("""
-    <div class="feature-card">
-
-        <h2>🤖 AI Forecasting</h2>
-
+    <div class="card">
+        <h1>🤖</h1>
+        <h2>AI Forecasting</h2>
         <p>
         Predict future business growth
         using AI-powered forecasting.
         </p>
-
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
-
     st.markdown("""
-    <div class="feature-card">
-
-        <h2>⚡ Smart Insights</h2>
-
+    <div class="card">
+        <h1>⚡</h1>
+        <h2>Smart Insights</h2>
         <p>
         AI-generated recommendations
         for faster decision making.
         </p>
-
     </div>
     """, unsafe_allow_html=True)
 
@@ -233,16 +240,19 @@ st.write("")
 st.write("")
 
 # =========================================
-# STATS SECTION
+# STATS
 # =========================================
 
-st.header("📈 Trusted Worldwide")
+st.markdown(
+    '<div class="section-title">📈 Trusted Worldwide</div>',
+    unsafe_allow_html=True
+)
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.markdown("""
-    <div class="stats-box">
+    <div class="stat-card">
         <h1>10K+</h1>
         <p>Businesses</p>
     </div>
@@ -250,7 +260,7 @@ with col1:
 
 with col2:
     st.markdown("""
-    <div class="stats-box">
+    <div class="stat-card">
         <h1>99.9%</h1>
         <p>Uptime</p>
     </div>
@@ -258,7 +268,7 @@ with col2:
 
 with col3:
     st.markdown("""
-    <div class="stats-box">
+    <div class="stat-card">
         <h1>1M+</h1>
         <p>Reports Generated</p>
     </div>
@@ -266,7 +276,7 @@ with col3:
 
 with col4:
     st.markdown("""
-    <div class="stats-box">
+    <div class="stat-card">
         <h1>24/7</h1>
         <p>AI Monitoring</p>
     </div>
@@ -279,55 +289,43 @@ st.write("")
 # PRICING
 # =========================================
 
-st.header("💎 Pricing")
+st.markdown(
+    '<div class="section-title">💎 Pricing</div>',
+    unsafe_allow_html=True
+)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
-
     st.markdown("""
-    <div class="pricing-card">
-
+    <div class="price-card">
         <h2>Starter</h2>
-
         <h1>$9</h1>
-
         <p>Basic analytics</p>
         <p>AI insights</p>
         <p>1 dashboard</p>
-
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
-
     st.markdown("""
-    <div class="pricing-card">
-
+    <div class="price-card">
         <h2>Pro</h2>
-
         <h1>$49</h1>
-
         <p>Advanced AI</p>
         <p>Unlimited dashboards</p>
         <p>Forecasting tools</p>
-
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
-
     st.markdown("""
-    <div class="pricing-card">
-
+    <div class="price-card">
         <h2>Enterprise</h2>
-
         <h1>$199</h1>
-
         <p>Custom AI solutions</p>
         <p>Priority support</p>
         <p>Unlimited everything</p>
-
     </div>
     """, unsafe_allow_html=True)
 
@@ -341,13 +339,13 @@ st.write("")
 st.markdown("---")
 
 st.markdown("""
-<center>
+<div style="text-align:center; padding:20px;">
 
-<h3>🌐 AI ERP PLATFORM</h3>
+    <h3>🌐 AI ERP PLATFORM</h3>
 
-<p style="color:#9CA3AF;">
-Built with AI + Streamlit + Modern SaaS Design
-</p>
+    <p style="color:#9CA3AF;">
+        Built with AI + Streamlit + Premium UI
+    </p>
 
-</center>
+</div>
 """, unsafe_allow_html=True)
