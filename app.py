@@ -399,7 +399,7 @@ if not st.session_state.logged_in:
         </div>
 
     </div>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True
 
     username = st.text_input("👤 Username")
 
