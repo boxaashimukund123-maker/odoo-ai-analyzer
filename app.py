@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 st.set_page_config(
     page_title="AI ERP Platform",
@@ -7,32 +8,38 @@ st.set_page_config(
     layout="wide"
 )
 
-# =========================
-# CSS + ANIMATIONS
-# =========================
+# ========================================
+# MASSIVE PREMIUM CSS
+# ========================================
 
 st.markdown("""
 <style>
 
+/* MAIN APP */
+
 .stApp {
+
     background: linear-gradient(
         -45deg,
         #020617,
         #00113a,
         #0f172a,
-        #111827
+        #111827,
+        #1e1b4b
     );
 
     background-size: 400% 400%;
 
-    animation: gradientMove 12s ease infinite;
+    animation: aurora 15s ease infinite;
 
     color: white;
+
+    overflow-x: hidden;
 }
 
-/* ANIMATED BACKGROUND */
+/* AURORA BACKGROUND */
 
-@keyframes gradientMove {
+@keyframes aurora {
 
     0% {
         background-position: 0% 50%;
@@ -47,7 +54,7 @@ st.markdown("""
     }
 }
 
-/* FLOATING PARTICLES */
+/* PARTICLES */
 
 .particles {
     position: fixed;
@@ -61,11 +68,12 @@ st.markdown("""
 
 .particle {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(59,130,246,0.7);
+    width: 8px;
+    height: 8px;
+    background: rgba(59,130,246,0.6);
     border-radius: 50%;
-    animation: float 15s linear infinite;
+    animation: float 18s linear infinite;
+    filter: blur(1px);
 }
 
 .particle:nth-child(1) {
@@ -75,22 +83,22 @@ st.markdown("""
 
 .particle:nth-child(2) {
     left: 25%;
-    animation-duration: 14s;
+    animation-duration: 16s;
 }
 
 .particle:nth-child(3) {
-    left: 40%;
-    animation-duration: 18s;
+    left: 45%;
+    animation-duration: 13s;
 }
 
 .particle:nth-child(4) {
-    left: 60%;
-    animation-duration: 12s;
+    left: 65%;
+    animation-duration: 20s;
 }
 
 .particle:nth-child(5) {
     left: 80%;
-    animation-duration: 20s;
+    animation-duration: 14s;
 }
 
 @keyframes float {
@@ -110,23 +118,32 @@ st.markdown("""
     }
 }
 
-/* HERO LINE */
+/* HERO */
 
 .hero-line {
+
     width: 100%;
     height: 5px;
+
     border-radius: 999px;
+
     background: rgba(255,255,255,0.08);
+
     overflow: hidden;
+
     margin-top: 25px;
     margin-bottom: 45px;
 }
 
 .hero-line::before {
+
     content: "";
+
     display: block;
+
     width: 40%;
     height: 100%;
+
     background: linear-gradient(
         90deg,
         transparent,
@@ -148,32 +165,46 @@ st.markdown("""
     }
 }
 
-/* FEATURE CARDS */
+/* FLOATING GLASS CARDS */
 
-.feature-card {
-    padding: 25px;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    color: white;
-    font-size: 18px;
-    font-weight: 500;
-    transition: 0.3s ease;
+.glass {
+
+    background: rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    transition: 0.35s ease;
+
+    animation: floatCard 4s ease-in-out infinite;
 }
 
-.feature-card:hover {
-    transform: translateY(-6px);
+.glass:hover {
+
+    transform: translateY(-10px) scale(1.02);
+
+    box-shadow:
+        0px 0px 35px rgba(59,130,246,0.35);
 }
 
-.blue {
-    background: linear-gradient(135deg, #1e3a8a, #0f172a);
-}
+@keyframes floatCard {
 
-.green {
-    background: linear-gradient(135deg, #14532d, #052e16);
-}
+    0% {
+        transform: translateY(0px);
+    }
 
-.yellow {
-    background: linear-gradient(135deg, #713f12, #422006);
+    50% {
+        transform: translateY(-6px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* GLOW BUTTON */
@@ -182,9 +213,9 @@ st.markdown("""
 
     width: 100%;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    padding: 14px;
+    padding: 15px;
 
     font-size: 18px;
 
@@ -201,9 +232,11 @@ st.markdown("""
     );
 
     box-shadow:
-        0px 0px 15px rgba(37,99,235,0.35);
+        0px 0px 18px rgba(37,99,235,0.45);
 
     transition: 0.3s ease;
+
+    animation: pulse 2s infinite;
 }
 
 .stButton > button:hover {
@@ -211,69 +244,236 @@ st.markdown("""
     transform: scale(1.05);
 
     box-shadow:
-        0px 0px 35px rgba(59,130,246,0.75);
+        0px 0px 40px rgba(59,130,246,0.9);
+}
 
-    background: linear-gradient(
-        135deg,
-        #3b82f6,
-        #2563eb
-    );
+@keyframes pulse {
+
+    0% {
+        box-shadow:
+            0px 0px 15px rgba(37,99,235,0.4);
+    }
+
+    50% {
+        box-shadow:
+            0px 0px 35px rgba(59,130,246,0.8);
+    }
+
+    100% {
+        box-shadow:
+            0px 0px 15px rgba(37,99,235,0.4);
+    }
+}
+
+/* COUNTERS */
+
+.metric-box {
+
+    text-align: center;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* SIDEBAR */
+
+section[data-testid="stSidebar"] {
+
+    background: rgba(10,10,20,0.75);
+
+    backdrop-filter: blur(12px);
+
+    border-right: 1px solid rgba(255,255,255,0.08);
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
+# ========================================
 # PARTICLES
-# =========================
+# ========================================
 
 st.markdown("""
 <div class="particles">
 
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
 
 </div>
 """, unsafe_allow_html=True)
 
-# =========================
-# HERO
-# =========================
+# ========================================
+# SIDEBAR
+# ========================================
 
-st.title("🚀 AI ERP PLATFORM")
+st.sidebar.title("🚀 AI ERP")
 
-st.subheader(
-    "Smarter business intelligence powered by AI"
+page = st.sidebar.radio(
+    "Navigation",
+    [
+        "Home",
+        "Analyzer"
+    ]
 )
 
-st.markdown(
-    '<div class="hero-line"></div>',
-    unsafe_allow_html=True
-)
+# ========================================
+# HOME PAGE
+# ========================================
 
-# =========================
-# BUTTON
-# =========================
+if page == "Home":
 
-col1, col2, col3 = st.columns([1,1,1])
+    st.title("🚀 AI ERP PLATFORM")
 
-with col2:
+    st.subheader(
+        "Smarter business intelligence powered by AI"
+    )
 
-    if st.button("🚀 Launch Platform"):
-        st.session_state.page = "analyzer"
+    st.markdown(
+        '<div class="hero-line"></div>',
+        unsafe_allow_html=True
+    )
 
-# =========================
-# ANALYZER
-# =========================
+    # TYPING EFFECT
 
-if st.session_state.get("page") == "analyzer":
+    with st.empty():
 
-    st.divider()
+        text = ""
 
-    st.header("📊 ERP Analyzer Dashboard")
+        for char in "Analyzing future business intelligence...":
+
+            text += char
+
+            st.markdown(
+                f"### 🤖 {text}"
+            )
+
+            time.sleep(0.03)
+
+    st.write("")
+    st.write("")
+
+    # BUTTON
+
+    col1, col2, col3 = st.columns([1,1,1])
+
+    with col2:
+
+        if st.button("🚀 Launch Platform"):
+
+            st.success(
+                "Open the Analyzer tab from the sidebar 🔥"
+            )
+
+    st.write("")
+    st.write("")
+
+    # FLOATING GLASS CARDS
+
+    st.header("✨ Platform Features")
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+
+        st.markdown("""
+        <div class="glass">
+
+        <h2>📊 Analytics</h2>
+
+        <p>
+        Advanced ERP analytics with
+        real-time business insights.
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c2:
+
+        st.markdown("""
+        <div class="glass">
+
+        <h2>🤖 AI Forecasting</h2>
+
+        <p>
+        Predict future growth with AI.
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c3:
+
+        st.markdown("""
+        <div class="glass">
+
+        <h2>⚡ Smart Insights</h2>
+
+        <p>
+        AI recommendations for ERP systems.
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ANIMATED COUNTERS
+
+    st.write("")
+    st.write("")
+
+    st.header("📈 Trusted Worldwide")
+
+    s1, s2, s3, s4 = st.columns(4)
+
+    with s1:
+        st.markdown("""
+        <div class="metric-box">
+        <h1>10K+</h1>
+        <p>Businesses</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with s2:
+        st.markdown("""
+        <div class="metric-box">
+        <h1>99.9%</h1>
+        <p>Uptime</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with s3:
+        st.markdown("""
+        <div class="metric-box">
+        <h1>1M+</h1>
+        <p>Reports</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with s4:
+        st.markdown("""
+        <div class="metric-box">
+        <h1>24/7</h1>
+        <p>Monitoring</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+# ========================================
+# ANALYZER PAGE
+# ========================================
+
+if page == "Analyzer":
+
+    st.title("📊 ERP Analyzer Dashboard")
 
     uploaded_file = st.file_uploader(
         "Upload CSV File",
@@ -290,11 +490,9 @@ if st.session_state.get("page") == "analyzer":
 
         st.dataframe(df)
 
-        # =========================
-        # LIVE CHARTS
-        # =========================
+        # CHARTS
 
-        st.subheader("📈 Auto Charts")
+        st.subheader("📈 Live Charts")
 
         numeric_cols = df.select_dtypes(
             include="number"
@@ -311,29 +509,7 @@ if st.session_state.get("page") == "analyzer":
 
             st.bar_chart(df[selected_col])
 
-        else:
-            st.warning(
-                "No numeric columns available for charts."
-            )
-
-        # =========================
-        # DATASET INFO
-        # =========================
-
-        st.subheader("📈 Dataset Info")
-
-        c1, c2, c3 = st.columns(3)
-
-        c1.metric("Rows", len(df))
-        c2.metric("Columns", len(df.columns))
-        c3.metric(
-            "Missing Values",
-            df.isnull().sum().sum()
-        )
-
-        # =========================
-        # AI INSIGHTS
-        # =========================
+        # INFO
 
         st.subheader("🧠 AI Insights")
 
@@ -346,94 +522,6 @@ if st.session_state.get("page") == "analyzer":
             st.dataframe(
                 numeric_df.describe().round(2)
             )
-
-        else:
-            st.warning(
-                "No numeric columns found."
-            )
-
-# =========================
-# FEATURES
-# =========================
-
-st.write("")
-st.write("")
-
-st.header("✨ Platform Features")
-
-c1, c2, c3 = st.columns(3)
-
-with c1:
-
-    st.markdown("""
-    <div class="feature-card blue">
-    📊 Analytics<br><br>
-    Advanced ERP analytics with real-time business insights.
-    </div>
-    """, unsafe_allow_html=True)
-
-with c2:
-
-    st.markdown("""
-    <div class="feature-card green">
-    🤖 AI Forecasting<br><br>
-    Predict future growth with AI.
-    </div>
-    """, unsafe_allow_html=True)
-
-with c3:
-
-    st.markdown("""
-    <div class="feature-card yellow">
-    ⚡ Smart Insights<br><br>
-    AI recommendations for ERP systems.
-    </div>
-    """, unsafe_allow_html=True)
-
-# =========================
-# STATS
-# =========================
-
-st.write("")
-st.write("")
-
-st.header("📈 Trusted Worldwide")
-
-s1, s2, s3, s4 = st.columns(4)
-
-s1.metric("Businesses", "10K+")
-s2.metric("Uptime", "99.9%")
-s3.metric("Reports", "1M+")
-s4.metric("Monitoring", "24/7")
-
-# =========================
-# PRICING
-# =========================
-
-st.write("")
-st.write("")
-
-st.header("💎 Pricing")
-
-p1, p2, p3 = st.columns(3)
-
-with p1:
-    st.subheader("Starter")
-    st.write("$9/month")
-    st.write("Basic analytics")
-    st.write("AI insights")
-
-with p2:
-    st.subheader("Pro")
-    st.write("$49/month")
-    st.write("Advanced AI")
-    st.write("Unlimited dashboards")
-
-with p3:
-    st.subheader("Enterprise")
-    st.write("$199/month")
-    st.write("Custom AI solutions")
-    st.write("Priority support")
 
 st.divider()
 
