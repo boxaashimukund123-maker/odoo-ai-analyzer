@@ -97,20 +97,42 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<div class="login-box">
+st.markdown(
+    """
+    <div style="
+        max-width:500px;
+        margin:auto;
+        margin-top:120px;
+        padding:40px;
+        border-radius:24px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(16px);
+        border:1px solid rgba(255,255,255,0.1);
+        text-align:center;
+        box-shadow:0px 0px 40px rgba(59,130,246,0.3);
+    ">
 
-    <div class="title">
-        🚀 AI ERP
+        <div style="
+            font-size:52px;
+            font-weight:bold;
+            color:white;
+            margin-bottom:10px;
+        ">
+            🚀 AI ERP
+        </div>
+
+        <div style="
+            color:#CBD5E1;
+            font-size:18px;
+            margin-bottom:25px;
+        ">
+            Next generation AI business intelligence platform
+        </div>
+
     </div>
-
-    <div class="sub">
-        Next generation AI business intelligence platform
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
+    """,
+    unsafe_allow_html=True
+)
 username = st.text_input("👤 Username")
 
 password = st.text_input(
