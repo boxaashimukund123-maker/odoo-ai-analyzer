@@ -13,20 +13,20 @@ st.set_page_config(
 )
 
 # =========================================
-# SESSION STATE
+# LOGIN SESSION
 # =========================================
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # =========================================
-# MASSIVE PREMIUM CSS
+# PREMIUM CSS
 # =========================================
 
 st.markdown("""
 <style>
 
-/* MAIN APP */
+/* APP BACKGROUND */
 
 .stApp {
 
@@ -44,8 +44,6 @@ st.markdown("""
     animation: aurora 15s ease infinite;
 
     color: white;
-
-    overflow-x: hidden;
 }
 
 /* AURORA */
@@ -83,7 +81,6 @@ st.markdown("""
     border-radius: 50%;
     background: rgba(59,130,246,0.7);
     animation: float 18s linear infinite;
-    filter: blur(2px);
 }
 
 .particle:nth-child(1) {
@@ -138,23 +135,25 @@ st.markdown("""
 
     margin-top: 100px;
 
-    padding: 45px;
+    padding: 40px;
 
-    border-radius: 28px;
+    border-radius: 24px;
 
     background: rgba(255,255,255,0.08);
 
     backdrop-filter: blur(18px);
 
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.1);
+
+    text-align: center;
 
     box-shadow:
-        0px 0px 40px rgba(59,130,246,0.18);
+        0px 0px 40px rgba(59,130,246,0.25);
 
     animation: floatCard 4s ease-in-out infinite;
 }
 
-/* FLOATING */
+/* FLOATING CARD */
 
 @keyframes floatCard {
 
@@ -175,37 +174,24 @@ st.markdown("""
 
 .login-title {
 
-    text-align: center;
-
-    font-size: 50px;
+    font-size: 52px;
 
     font-weight: bold;
 
     margin-bottom: 10px;
 
-    background: linear-gradient(
-        90deg,
-        #60a5fa,
-        #3b82f6,
-        #818cf8
-    );
-
-    -webkit-background-clip: text;
-
-    -webkit-text-fill-color: transparent;
+    color: white;
 }
 
-/* LOGIN SUB */
+/* LOGIN SUBTITLE */
 
 .login-sub {
 
-    text-align: center;
-
-    color: #cbd5e1;
-
-    margin-bottom: 35px;
+    color: #CBD5E1;
 
     font-size: 18px;
+
+    margin-bottom: 25px;
 }
 
 /* INPUTS */
@@ -214,9 +200,9 @@ st.markdown("""
 
     background: rgba(255,255,255,0.06) !important;
 
-    border-radius: 14px !important;
-
     color: white !important;
+
+    border-radius: 12px !important;
 }
 
 /* BUTTON */
@@ -225,7 +211,7 @@ st.markdown("""
 
     width: 100%;
 
-    border-radius: 16px;
+    border-radius: 14px;
 
     padding: 14px;
 
@@ -244,11 +230,9 @@ st.markdown("""
     );
 
     box-shadow:
-        0px 0px 20px rgba(59,130,246,0.45);
+        0px 0px 20px rgba(59,130,246,0.5);
 
     transition: 0.3s ease;
-
-    animation: pulse 2s infinite;
 }
 
 .stButton > button:hover {
@@ -256,27 +240,7 @@ st.markdown("""
     transform: scale(1.03);
 
     box-shadow:
-        0px 0px 45px rgba(59,130,246,0.85);
-}
-
-/* PULSE */
-
-@keyframes pulse {
-
-    0% {
-        box-shadow:
-            0px 0px 18px rgba(59,130,246,0.45);
-    }
-
-    50% {
-        box-shadow:
-            0px 0px 38px rgba(59,130,246,0.85);
-    }
-
-    100% {
-        box-shadow:
-            0px 0px 18px rgba(59,130,246,0.45);
-    }
+        0px 0px 40px rgba(59,130,246,0.9);
 }
 
 /* HERO LINE */
@@ -336,11 +300,11 @@ st.markdown("""
 
     border: 1px solid rgba(255,255,255,0.08);
 
-    border-radius: 22px;
+    border-radius: 20px;
 
-    padding: 28px;
+    padding: 25px;
 
-    transition: 0.35s ease;
+    transition: 0.3s ease;
 
     animation: floatCard 4s ease-in-out infinite;
 }
@@ -387,40 +351,20 @@ st.markdown("""
 
 if not st.session_state.logged_in:
 
-    st.markdown(
-    """
-    <div style="
-        max-width:500px;
-        margin:auto;
-        margin-top:100px;
-        padding:45px;
-        border-radius:28px;
-        background:rgba(255,255,255,0.08);
-        backdrop-filter:blur(18px);
-        border:1px solid rgba(255,255,255,0.12);
-        box-shadow:0px 0px 40px rgba(59,130,246,0.18);
-        text-align:center;
-    ">
+    st.markdown("""
+    <div class="login-card">
 
-        <h1 style="
-            font-size:52px;
-            margin-bottom:10px;
-            color:white;
-        ">
+        <div class="login-title">
             🚀 AI ERP
-        </h1>
+        </div>
 
-        <p style="
-            color:#cbd5e1;
-            font-size:18px;
-        ">
+        <div class="login-sub">
             Next generation AI business intelligence platform
-        </p>
+        </div>
 
     </div>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
+
     username = st.text_input("👤 Username")
 
     password = st.text_input(
@@ -559,8 +503,6 @@ else:
 
             st.dataframe(df)
 
-            # CHARTS
-
             st.subheader("📈 Live Charts")
 
             numeric_cols = df.select_dtypes(
@@ -577,8 +519,6 @@ else:
                 st.line_chart(df[selected_col])
 
                 st.bar_chart(df[selected_col])
-
-            # INSIGHTS
 
             st.subheader("🧠 AI Insights")
 
