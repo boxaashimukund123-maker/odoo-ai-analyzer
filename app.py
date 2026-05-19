@@ -387,20 +387,40 @@ st.markdown("""
 
 if not st.session_state.logged_in:
 
-    st.markdown("""
-    <div class="login-card">
+    st.markdown(
+    """
+    <div style="
+        max-width:500px;
+        margin:auto;
+        margin-top:100px;
+        padding:45px;
+        border-radius:28px;
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(18px);
+        border:1px solid rgba(255,255,255,0.12);
+        box-shadow:0px 0px 40px rgba(59,130,246,0.18);
+        text-align:center;
+    ">
 
-        <div class="login-title">
+        <h1 style="
+            font-size:52px;
+            margin-bottom:10px;
+            color:white;
+        ">
             🚀 AI ERP
-        </div>
+        </h1>
 
-        <div class="login-sub">
+        <p style="
+            color:#cbd5e1;
+            font-size:18px;
+        ">
             Next generation AI business intelligence platform
-        </div>
+        </p>
 
     </div>
-    """, unsafe_allow_html=True)
-
+    """,
+    unsafe_allow_html=True
+)
     username = st.text_input("👤 Username")
 
     password = st.text_input(
