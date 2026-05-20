@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import time
 
 # =========================================
 # PAGE CONFIG
@@ -20,13 +19,13 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # =========================================
-# CSS
+# PREMIUM CSS
 # =========================================
 
 st.markdown("""
 <style>
 
-/* BACKGROUND */
+/* MAIN BACKGROUND */
 
 .stApp {
 
@@ -38,27 +37,49 @@ st.markdown("""
     );
 
     color: white;
+
+    overflow-x: hidden;
 }
 
 /* PARTICLES */
 
 .particles {
+
     position: fixed;
+
     width: 100%;
+
     height: 100%;
+
     top: 0;
+
     left: 0;
+
     overflow: hidden;
-    z-index: -1;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
 .particle {
+
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background: rgba(59,130,246,0.5);
+
+    width: 18px;
+
+    height: 18px;
+
+    background: rgba(59,130,246,0.9);
+
     border-radius: 50%;
-    animation: float 16s linear infinite;
+
+    animation: float 12s linear infinite;
+
+    filter: blur(1px);
+
+    box-shadow:
+        0px 0px 25px rgba(59,130,246,0.9);
 }
 
 .particle:nth-child(1) {
@@ -219,7 +240,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # =========================================
-# LOGIN
+# LOGIN PAGE
 # =========================================
 
 if not st.session_state.logged_in:
@@ -268,7 +289,9 @@ else:
         ]
     )
 
+    # =====================================
     # DASHBOARD
+    # =====================================
 
     if page == "Dashboard":
 
@@ -323,15 +346,25 @@ else:
         st.write("")
         st.write("")
 
-        # ANIMATED COUNTERS
+        # CHARTS
 
-        st.subheader("📈 Business Growth")
+        left, right = st.columns(2)
 
-        chart = st.empty()
+        with left:
 
-        data = [5, 8, 12, 18, 24, 32, 41]
+            st.subheader("📈 Revenue Growth")
 
-        chart.line_chart(data)
+            st.line_chart(
+                [5, 8, 12, 18, 24, 32, 41]
+            )
+
+        with right:
+
+            st.subheader("📊 Sales Performance")
+
+            st.bar_chart(
+                [20, 14, 30, 25, 18]
+            )
 
         st.write("")
         st.write("")
@@ -349,7 +382,9 @@ else:
         st.write("Customer Satisfaction")
         st.progress(87)
 
+    # =====================================
     # ANALYZER
+    # =====================================
 
     if page == "Analyzer":
 
@@ -383,7 +418,9 @@ else:
 
                 st.bar_chart(df[selected_col])
 
+    # =====================================
     # AI INSIGHTS
+    # =====================================
 
     if page == "AI Insights":
 
