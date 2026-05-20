@@ -135,56 +135,163 @@ else:
 
     if page == "Dashboard":
 
-        st.title("📊 Odoo AI Dashboard")
+    st.title("🚀 Odoo AI Dashboard")
 
-        st.success(
-            "Connected to AI business intelligence system"
-        )
+    st.success(
+        "AI systems operational • Live business monitoring enabled"
+    )
 
-        st.divider()
+    st.write("")
 
-        col1, col2, col3, col4 = st.columns(4)
+    # =====================================
+    # KPI CARDS
+    # =====================================
 
-        col1.metric(
-            "💰 Revenue",
-            "$128K",
-            "+18%"
-        )
+    c1, c2, c3, c4 = st.columns(4)
 
-        col2.metric(
-            "👥 Customers",
-            "4,231",
-            "+9%"
-        )
+    with c1:
 
-        col3.metric(
-            "📦 Orders",
-            "1,284",
-            "+12%"
-        )
+        st.markdown("""
+        <div style="
+            background:linear-gradient(135deg,#2563eb,#1e3a8a);
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 25px rgba(37,99,235,0.45);
+        ">
 
-        col4.metric(
-            "🤖 AI Score",
-            "98%",
-            "+4%"
-        )
+        <h3>💰 Revenue</h3>
 
-        st.write("")
+        <h1>$128K</h1>
+
+        <p>+18% Growth</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c2:
+
+        st.markdown("""
+        <div style="
+            background:linear-gradient(135deg,#16a34a,#14532d);
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 25px rgba(34,197,94,0.45);
+        ">
+
+        <h3>👥 Users</h3>
+
+        <h1>4,231</h1>
+
+        <p>+9% Growth</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c3:
+
+        st.markdown("""
+        <div style="
+            background:linear-gradient(135deg,#d97706,#78350f);
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 25px rgba(245,158,11,0.45);
+        ">
+
+        <h3>📦 Orders</h3>
+
+        <h1>1,284</h1>
+
+        <p>+12% Growth</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c4:
+
+        st.markdown("""
+        <div style="
+            background:linear-gradient(135deg,#9333ea,#581c87);
+            padding:25px;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:0px 0px 25px rgba(168,85,247,0.45);
+        ">
+
+        <h3>🤖 AI Score</h3>
+
+        <h1>98%</h1>
+
+        <p>System Stable</p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    st.write("")
+
+    # =====================================
+    # CHARTS
+    # =====================================
+
+    left, right = st.columns(2)
+
+    with left:
 
         st.subheader("📈 Revenue Growth")
 
         st.line_chart(
-            [5, 8, 12, 15, 18, 22, 27]
+            [5, 9, 14, 18, 22, 27, 35]
         )
 
-        st.write("")
+    with right:
 
-        st.subheader("📊 Sales Distribution")
+        st.subheader("📊 Sales Performance")
 
         st.bar_chart(
             [20, 14, 30, 25, 18]
         )
 
+    st.write("")
+    st.write("")
+
+    # =====================================
+    # AI ACTIVITY
+    # =====================================
+
+    st.subheader("🧠 Live AI Activity")
+
+    st.info(
+        "AI detected increased customer engagement in the last 24 hours."
+    )
+
+    st.success(
+        "Revenue forecast predicts +21% growth next quarter."
+    )
+
+    st.warning(
+        "Inventory for Product A may run low within 7 days."
+    )
+
+    # =====================================
+    # PROGRESS BARS
+    # =====================================
+
+    st.subheader("⚡ System Performance")
+
+    st.write("AI Processing")
+
+    st.progress(92)
+
+    st.write("Server Stability")
+
+    st.progress(99)
+
+    st.write("Customer Satisfaction")
+
+    st.progress(87)
     # =====================================
     # ANALYZER
     # =====================================
