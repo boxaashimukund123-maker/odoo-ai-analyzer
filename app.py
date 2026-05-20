@@ -41,7 +41,7 @@ st.markdown("""
 
     width: 100%;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
     padding: 12px;
 
@@ -49,11 +49,15 @@ st.markdown("""
 
     font-weight: bold;
 
-    background: #2563eb;
+    border: none;
 
     color: white;
 
-    border: none;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
 }
 
 /* INPUTS */
@@ -64,7 +68,7 @@ st.markdown("""
 
     color: white !important;
 
-    border-radius: 10px !important;
+    border-radius: 12px !important;
 }
 
 /* SIDEBAR */
@@ -135,163 +139,153 @@ else:
 
     if page == "Dashboard":
 
-    st.title("🚀 Odoo AI Dashboard")
+        st.title("🚀 Odoo AI Dashboard")
 
-    st.success(
-        "AI systems operational • Live business monitoring enabled"
-    )
-
-    st.write("")
-
-    # =====================================
-    # KPI CARDS
-    # =====================================
-
-    c1, c2, c3, c4 = st.columns(4)
-
-    with c1:
-
-        st.markdown("""
-        <div style="
-            background:linear-gradient(135deg,#2563eb,#1e3a8a);
-            padding:25px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0px 0px 25px rgba(37,99,235,0.45);
-        ">
-
-        <h3>💰 Revenue</h3>
-
-        <h1>$128K</h1>
-
-        <p>+18% Growth</p>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c2:
-
-        st.markdown("""
-        <div style="
-            background:linear-gradient(135deg,#16a34a,#14532d);
-            padding:25px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0px 0px 25px rgba(34,197,94,0.45);
-        ">
-
-        <h3>👥 Users</h3>
-
-        <h1>4,231</h1>
-
-        <p>+9% Growth</p>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c3:
-
-        st.markdown("""
-        <div style="
-            background:linear-gradient(135deg,#d97706,#78350f);
-            padding:25px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0px 0px 25px rgba(245,158,11,0.45);
-        ">
-
-        <h3>📦 Orders</h3>
-
-        <h1>1,284</h1>
-
-        <p>+12% Growth</p>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-    with c4:
-
-        st.markdown("""
-        <div style="
-            background:linear-gradient(135deg,#9333ea,#581c87);
-            padding:25px;
-            border-radius:20px;
-            text-align:center;
-            box-shadow:0px 0px 25px rgba(168,85,247,0.45);
-        ">
-
-        <h3>🤖 AI Score</h3>
-
-        <h1>98%</h1>
-
-        <p>System Stable</p>
-
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.write("")
-    st.write("")
-
-    # =====================================
-    # CHARTS
-    # =====================================
-
-    left, right = st.columns(2)
-
-    with left:
-
-        st.subheader("📈 Revenue Growth")
-
-        st.line_chart(
-            [5, 9, 14, 18, 22, 27, 35]
+        st.success(
+            "AI systems operational • Live monitoring enabled"
         )
 
-    with right:
+        st.write("")
 
-        st.subheader("📊 Sales Performance")
+        # KPI CARDS
 
-        st.bar_chart(
-            [20, 14, 30, 25, 18]
+        c1, c2, c3, c4 = st.columns(4)
+
+        with c1:
+
+            st.markdown("""
+            <div style="
+                background:linear-gradient(135deg,#2563eb,#1e3a8a);
+                padding:25px;
+                border-radius:20px;
+                text-align:center;
+                box-shadow:0px 0px 25px rgba(37,99,235,0.45);
+            ">
+
+            <h3>💰 Revenue</h3>
+
+            <h1>$128K</h1>
+
+            <p>+18% Growth</p>
+
+            </div>
+            """, unsafe_allow_html=True)
+
+        with c2:
+
+            st.markdown("""
+            <div style="
+                background:linear-gradient(135deg,#16a34a,#14532d);
+                padding:25px;
+                border-radius:20px;
+                text-align:center;
+                box-shadow:0px 0px 25px rgba(34,197,94,0.45);
+            ">
+
+            <h3>👥 Users</h3>
+
+            <h1>4,231</h1>
+
+            <p>+9% Growth</p>
+
+            </div>
+            """, unsafe_allow_html=True)
+
+        with c3:
+
+            st.markdown("""
+            <div style="
+                background:linear-gradient(135deg,#d97706,#78350f);
+                padding:25px;
+                border-radius:20px;
+                text-align:center;
+                box-shadow:0px 0px 25px rgba(245,158,11,0.45);
+            ">
+
+            <h3>📦 Orders</h3>
+
+            <h1>1,284</h1>
+
+            <p>+12% Growth</p>
+
+            </div>
+            """, unsafe_allow_html=True)
+
+        with c4:
+
+            st.markdown("""
+            <div style="
+                background:linear-gradient(135deg,#9333ea,#581c87);
+                padding:25px;
+                border-radius:20px;
+                text-align:center;
+                box-shadow:0px 0px 25px rgba(168,85,247,0.45);
+            ">
+
+            <h3>🤖 AI Score</h3>
+
+            <h1>98%</h1>
+
+            <p>System Stable</p>
+
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.write("")
+        st.write("")
+
+        # CHARTS
+
+        left, right = st.columns(2)
+
+        with left:
+
+            st.subheader("📈 Revenue Growth")
+
+            st.line_chart(
+                [5, 9, 14, 18, 22, 27, 35]
+            )
+
+        with right:
+
+            st.subheader("📊 Sales Performance")
+
+            st.bar_chart(
+                [20, 14, 30, 25, 18]
+            )
+
+        st.write("")
+        st.write("")
+
+        # AI ACTIVITY
+
+        st.subheader("🧠 Live AI Activity")
+
+        st.info(
+            "AI detected increased customer engagement in the last 24 hours."
         )
 
-    st.write("")
-    st.write("")
+        st.success(
+            "Revenue forecast predicts +21% growth next quarter."
+        )
 
-    # =====================================
-    # AI ACTIVITY
-    # =====================================
+        st.warning(
+            "Inventory for Product A may run low within 7 days."
+        )
 
-    st.subheader("🧠 Live AI Activity")
+        # PROGRESS BARS
 
-    st.info(
-        "AI detected increased customer engagement in the last 24 hours."
-    )
+        st.subheader("⚡ System Performance")
 
-    st.success(
-        "Revenue forecast predicts +21% growth next quarter."
-    )
+        st.write("AI Processing")
+        st.progress(92)
 
-    st.warning(
-        "Inventory for Product A may run low within 7 days."
-    )
+        st.write("Server Stability")
+        st.progress(99)
 
-    # =====================================
-    # PROGRESS BARS
-    # =====================================
+        st.write("Customer Satisfaction")
+        st.progress(87)
 
-    st.subheader("⚡ System Performance")
-
-    st.write("AI Processing")
-
-    st.progress(92)
-
-    st.write("Server Stability")
-
-    st.progress(99)
-
-    st.write("Customer Satisfaction")
-
-    st.progress(87)
     # =====================================
     # ANALYZER
     # =====================================
