@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import time
 
 # =========================================
 # PAGE CONFIG
@@ -12,27 +13,105 @@ st.set_page_config(
 )
 
 # =========================================
-# LOGIN SESSION
+# SESSION
 # =========================================
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
 # =========================================
-# STYLING
+# CSS
 # =========================================
 
 st.markdown("""
 <style>
 
+/* BACKGROUND */
+
 .stApp {
+
     background: linear-gradient(
         135deg,
         #020617,
         #00113a,
         #0f172a
     );
+
     color: white;
+}
+
+/* PARTICLES */
+
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(59,130,246,0.5);
+    border-radius: 50%;
+    animation: float 16s linear infinite;
+}
+
+.particle:nth-child(1) {
+    left: 10%;
+    animation-duration: 12s;
+}
+
+.particle:nth-child(2) {
+    left: 25%;
+    animation-duration: 18s;
+}
+
+.particle:nth-child(3) {
+    left: 50%;
+    animation-duration: 15s;
+}
+
+.particle:nth-child(4) {
+    left: 75%;
+    animation-duration: 20s;
+}
+
+.particle:nth-child(5) {
+    left: 90%;
+    animation-duration: 13s;
+}
+
+@keyframes float {
+
+    0% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* SIDEBAR */
+
+section[data-testid="stSidebar"] {
+
+    background: rgba(10,10,20,0.8);
+
+    backdrop-filter: blur(12px);
+
+    border-right: 1px solid rgba(255,255,255,0.08);
 }
 
 /* BUTTONS */
@@ -58,6 +137,16 @@ st.markdown("""
         #2563eb,
         #3b82f6
     );
+
+    transition: 0.3s ease;
+}
+
+.stButton > button:hover {
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0px 0px 30px rgba(59,130,246,0.7);
 }
 
 /* INPUTS */
@@ -71,18 +160,66 @@ st.markdown("""
     border-radius: 12px !important;
 }
 
-/* SIDEBAR */
+/* KPI CARDS */
 
-section[data-testid="stSidebar"] {
+.card {
 
-    background: rgba(10,10,20,0.75);
+    padding: 25px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    transition: 0.3s ease;
+
+    color: white;
+}
+
+.card:hover {
+
+    transform: translateY(-10px) scale(1.02);
+
+    box-shadow:
+        0px 0px 30px rgba(59,130,246,0.45);
+}
+
+.blue {
+    background: linear-gradient(135deg,#2563eb,#1e3a8a);
+}
+
+.green {
+    background: linear-gradient(135deg,#16a34a,#14532d);
+}
+
+.orange {
+    background: linear-gradient(135deg,#d97706,#78350f);
+}
+
+.purple {
+    background: linear-gradient(135deg,#9333ea,#581c87);
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # =========================================
-# LOGIN PAGE
+# PARTICLES
+# =========================================
+
+st.markdown("""
+<div class="particles">
+
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+
+</div>
+""", unsafe_allow_html=True)
+
+# =========================================
+# LOGIN
 # =========================================
 
 if not st.session_state.logged_in:
@@ -90,7 +227,7 @@ if not st.session_state.logged_in:
     st.title("🤖 Odoo AI Analyzer")
 
     st.subheader(
-        "AI-powered ERP analytics and business intelligence"
+        "AI-powered ERP analytics platform"
     )
 
     st.write("")
@@ -120,8 +257,6 @@ if not st.session_state.logged_in:
 
 else:
 
-    # SIDEBAR
-
     st.sidebar.title("🤖 Odoo AI")
 
     page = st.sidebar.radio(
@@ -133,9 +268,7 @@ else:
         ]
     )
 
-    # =====================================
     # DASHBOARD
-    # =====================================
 
     if page == "Dashboard":
 
@@ -152,128 +285,58 @@ else:
         c1, c2, c3, c4 = st.columns(4)
 
         with c1:
-
             st.markdown("""
-            <div style="
-                background:linear-gradient(135deg,#2563eb,#1e3a8a);
-                padding:25px;
-                border-radius:20px;
-                text-align:center;
-                box-shadow:0px 0px 25px rgba(37,99,235,0.45);
-            ">
-
+            <div class="card blue">
             <h3>💰 Revenue</h3>
-
             <h1>$128K</h1>
-
-            <p>+18% Growth</p>
-
+            <p>+18%</p>
             </div>
             """, unsafe_allow_html=True)
 
         with c2:
-
             st.markdown("""
-            <div style="
-                background:linear-gradient(135deg,#16a34a,#14532d);
-                padding:25px;
-                border-radius:20px;
-                text-align:center;
-                box-shadow:0px 0px 25px rgba(34,197,94,0.45);
-            ">
-
+            <div class="card green">
             <h3>👥 Users</h3>
-
             <h1>4,231</h1>
-
-            <p>+9% Growth</p>
-
+            <p>+9%</p>
             </div>
             """, unsafe_allow_html=True)
 
         with c3:
-
             st.markdown("""
-            <div style="
-                background:linear-gradient(135deg,#d97706,#78350f);
-                padding:25px;
-                border-radius:20px;
-                text-align:center;
-                box-shadow:0px 0px 25px rgba(245,158,11,0.45);
-            ">
-
+            <div class="card orange">
             <h3>📦 Orders</h3>
-
             <h1>1,284</h1>
-
-            <p>+12% Growth</p>
-
+            <p>+12%</p>
             </div>
             """, unsafe_allow_html=True)
 
         with c4:
-
             st.markdown("""
-            <div style="
-                background:linear-gradient(135deg,#9333ea,#581c87);
-                padding:25px;
-                border-radius:20px;
-                text-align:center;
-                box-shadow:0px 0px 25px rgba(168,85,247,0.45);
-            ">
-
+            <div class="card purple">
             <h3>🤖 AI Score</h3>
-
             <h1>98%</h1>
-
-            <p>System Stable</p>
-
+            <p>Stable</p>
             </div>
             """, unsafe_allow_html=True)
 
         st.write("")
         st.write("")
 
-        # CHARTS
+        # ANIMATED COUNTERS
 
-        left, right = st.columns(2)
+        st.subheader("📈 Business Growth")
 
-        with left:
+        chart = st.empty()
 
-            st.subheader("📈 Revenue Growth")
+        data = [5, 8, 12, 18, 24, 32, 41]
 
-            st.line_chart(
-                [5, 9, 14, 18, 22, 27, 35]
-            )
-
-        with right:
-
-            st.subheader("📊 Sales Performance")
-
-            st.bar_chart(
-                [20, 14, 30, 25, 18]
-            )
+        chart.line_chart(data)
 
         st.write("")
         st.write("")
 
-        # AI ACTIVITY
-
-        st.subheader("🧠 Live AI Activity")
-
-        st.info(
-            "AI detected increased customer engagement in the last 24 hours."
-        )
-
-        st.success(
-            "Revenue forecast predicts +21% growth next quarter."
-        )
-
-        st.warning(
-            "Inventory for Product A may run low within 7 days."
-        )
-
-        # PROGRESS BARS
+        # PROGRESS
 
         st.subheader("⚡ System Performance")
 
@@ -286,9 +349,7 @@ else:
         st.write("Customer Satisfaction")
         st.progress(87)
 
-    # =====================================
     # ANALYZER
-    # =====================================
 
     if page == "Analyzer":
 
@@ -305,8 +366,6 @@ else:
 
             st.success("CSV uploaded successfully!")
 
-            st.subheader("📄 Dataset Preview")
-
             st.dataframe(df)
 
             numeric_cols = df.select_dtypes(
@@ -316,68 +375,34 @@ else:
             if len(numeric_cols) > 0:
 
                 selected_col = st.selectbox(
-                    "Choose a numeric column",
+                    "Choose column",
                     numeric_cols
                 )
 
-                st.subheader("📈 Line Chart")
-
                 st.line_chart(df[selected_col])
-
-                st.subheader("📊 Bar Chart")
 
                 st.bar_chart(df[selected_col])
 
-                st.subheader("📉 Statistics")
-
-                st.dataframe(
-                    df[numeric_cols].describe()
-                )
-
-            else:
-
-                st.warning(
-                    "No numeric columns found."
-                )
-
-    # =====================================
     # AI INSIGHTS
-    # =====================================
 
     if page == "AI Insights":
 
         st.title("🧠 AI Business Insights")
 
         st.info(
-            "AI predicts a 21% increase in sales next quarter."
-        )
-
-        st.warning(
-            "Inventory for Product A may run low in 7 days."
+            "AI predicts 21% sales growth next quarter."
         )
 
         st.success(
-            "Customer retention improved by 13%."
+            "Customer engagement increased this week."
         )
 
-        st.subheader("🤖 AI Recommendations")
-
-        st.write(
-            "- Increase marketing for high-performing products"
+        st.warning(
+            "Inventory for Product A may run low soon."
         )
-
-        st.write(
-            "- Restock inventory for trending items"
-        )
-
-        st.write(
-            "- Optimize pricing for slow-moving products"
-        )
-
-# =========================================
-# FOOTER
-# =========================================
 
 st.divider()
 
-st.caption("🌐 Odoo AI Analyzer • Powered by Streamlit + AI")
+st.caption(
+    "🌐 Odoo AI Analyzer • Powered by Streamlit + AI"
+)
