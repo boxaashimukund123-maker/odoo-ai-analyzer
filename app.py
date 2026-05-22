@@ -441,10 +441,10 @@ else:
 # ODOO CONNECTION
 # =====================================
 
-if True:
-    st.title("🔗 Odoo Connection")
+if page == "🔗 Odoo Connection":
 
     st.title("🔗 Odoo Connection")
+         
 
     st.success("Ready for Odoo 18 Integration")
 
