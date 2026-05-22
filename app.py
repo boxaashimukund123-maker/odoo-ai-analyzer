@@ -441,11 +441,8 @@ else:
 # ODOO CONNECTION
 # =====================================
 
-if True: s
-
+if True:
     st.title("🔗 Odoo Connection")
-         
-
     st.success("Ready for Odoo 18 Integration")
 
     odoo_url = st.text_input(
@@ -468,37 +465,5 @@ if True: s
     )
 
     if st.button("🚀 Save Connection"):
-
-        st.session_state["odoo_url"] = odoo_url
-        st.session_state["odoo_db"] = database
-        st.session_state["odoo_email"] = email
-
         st.success("Connection settings saved!")
-
-    st.divider()
-
-    st.subheader("📊 Connection Status")
-
-    if "odoo_url" in st.session_state:
-
-        st.success("Configuration Loaded")
-
-        st.write(
-            f"URL: {st.session_state['odoo_url']}"
-        )
-
-        st.write(
-            f"Database: {st.session_state['odoo_db']}"
-        )
-
-    else:
-
-        st.warning(
-            "No Odoo configuration saved yet."
-        )
-st.divider()
-
-st.caption(
-    "🌐 Odoo AI Analyzer • Powered by Streamlit + AI"
-)
 
