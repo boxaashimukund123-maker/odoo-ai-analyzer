@@ -389,35 +389,32 @@ else:
 
     if page == "Analyzer":
 
-        st.title("📂 ERP Data Analyzer")
+    st.title("📊 Odoo Data Analyzer")
 
-        uploaded_file = st.file_uploader(
-            "Upload CSV File",
-            type=["csv"]
-        )
+    if "uid" not in st.session_state:
+        st.warning("Connect to Odoo first.")
+    else:
 
-        if uploaded_file is not None:
+        if st.button("📥 Load Customers"):
 
-            df = pd.read_csv(uploaded_file)
+            models = xmlrpc.client.ServerProxy(
+                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+            )
 
-            st.success("CSV uploaded successfully!")
+            customers = models.execute_kw(
+                st.session_state["database"],
+                st.session_state["uid"],
+                st.session_state["api_key"],
+                "res.partner",
+                "search_read",
+                [[]],
+                {
+                    "fields": ["name", "email"],
+                    "limit": 20
+                }
+            )
 
-            st.dataframe(df)
-
-            numeric_cols = df.select_dtypes(
-                include="number"
-            ).columns
-
-            if len(numeric_cols) > 0:
-
-                selected_col = st.selectbox(
-                    "Choose column",
-                    numeric_cols
-                )
-
-                st.line_chart(df[selected_col])
-
-                st.bar_chart(df[selected_col])
+            st.dataframe(customers)
 
     # =====================================
     # AI INSIGHTS
@@ -438,60 +435,73 @@ else:
         st.warning(
             "Inventory for Product A may run low soon."
         )
-# =====================================
-# ODOO CONNECTION
-# =====================================
+    # =====================================
+    # ODOO CONNECTION
+    # =====================================
 
-if True: 
+    if page == "🔗 Odoo Connection":
 
-    st.title("🔗 Odoo Connection")
+        st.title("🔗 Odoo Connection")
 
-    st.success("Ready for Odoo 18 Integration")
+        st.success("Ready for Odoo 18 Integration")
 
-    odoo_url = st.text_input(
-        "Odoo URL",
-        "https://franciscovortex.odoo.com"
-    )
-
-    database = st.text_input(
-        "Database",
-        "franciscovortex"
-    )
-
-    email = st.text_input(
-        "Email"
-    )
-
-    api_key = st.text_input(
-        "API Key",
-        type="password"
-    )
-
-    if st.button("🚀 Save Connection"):
-        st.success("Connection Saved!")
-if st.button("🔍 Test Connection"):
-    try:
-        common = xmlrpc.client.ServerProxy(
-            f"{odoo_url}/xmlrpc/2/common"
+        odoo_url = st.text_input(
+            "Odoo URL",
+            value="https://franciscovortex.odoo.com"
         )
 
-        uid = common.authenticate(
-            database,
-            email,
-            api_key,
-            {}
+        database = st.text_input(
+            "Database",
+            value="franciscovortex"
         )
 
-        if uid:
-            st.success(
-                f"✅ Connected successfully! User ID: {uid}"
-            )
-        else:
-            st.error(
-                "❌ Login failed. Check email or API key."
-            )
+        email = st.text_input("Email")
 
-    except Exception as e:
-        st.error(
-            f"❌ Connection error: {e}"
+        api_key = st.text_input(
+            "API Key",
+            type="password"
         )
+
+        if st.button("🚀 Save Connection"):
+
+            st.session_state["odoo_url"] = odoo_url
+            st.session_state["database"] = database
+            st.session_state["email"] = email
+            st.session_state["api_key"] = api_key
+
+            st.success("Connection Saved!")
+
+        if st.button("🔍 Test Connection"):
+
+            try:
+
+                common = xmlrpc.client.ServerProxy(
+                    f"{odoo_url}/xmlrpc/2/common"
+                )
+
+                uid = common.authenticate(
+                    database,
+                    email,
+                    api_key,
+                    {}
+                )
+
+                if uid:
+
+                    st.session_state["uid"] = uid
+
+                    st.success(
+                        f"✅ Connected successfully! User ID: {uid}"
+                    )
+
+                else:
+
+                    st.error(
+                        "❌ Login failed. Check email or API key."
+                    )
+
+            except Exception as e:
+
+                st.error(
+                    f"❌ Connection error: {e}"
+                )
