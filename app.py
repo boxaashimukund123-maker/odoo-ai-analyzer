@@ -441,7 +441,7 @@ else:
 # ODOO CONNECTION
 # =====================================
 
-if True: "🔗 Odoo Connection":
+if True: 
 
     st.title("🔗 Odoo Connection")
 
