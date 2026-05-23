@@ -391,32 +391,34 @@ else:
             "Inventory for Product A may run low soon."
         )
 
-# =====================================
-# ANALYZER
-# =====================================
+    # =====================================
+    # ANALYZER
+    # =====================================
 
-if page == "Analyzer":
-    st.title("📊 Odoo Data Analyzer")
-    st.info("Analyzer coming soon.")
-# =====================================
-# AI INSIGHTS
-# =====================================
+    if page == "Analyzer":
 
-if page == "AI Insights":
+        st.title("📊 Odoo Data Analyzer")
+        st.info("Analyzer coming soon.")
 
-    st.title("🧠 AI Business Insights")
+    # =====================================
+    # AI INSIGHTS
+    # =====================================
 
-    st.info(
-        "AI predicts 21% sales growth next quarter."
-    )
+    if page == "AI Insights":
 
-    st.success(
-        "Customer engagement increased this week."
-    )
+        st.title("🧠 AI Business Insights")
 
-    st.warning(
-        "Inventory for Product A may run low soon."
-    )
+        st.info(
+            "AI predicts 21% sales growth next quarter."
+        )
+
+        st.success(
+            "Customer engagement increased this week."
+        )
+
+        st.warning(
+            "Inventory for Product A may run low soon."
+        )
 
     # =====================================
     # ODOO CONNECTION
