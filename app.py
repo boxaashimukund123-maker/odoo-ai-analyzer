@@ -1,3 +1,4 @@
+st.write("🔥 TEST BUILD 123 🔥")
 import streamlit as st
 import pandas as pd
 import xmlrpc.client
@@ -381,52 +382,7 @@ else:
         st.progress(99)
 
         st.write("Customer Satisfaction")
-        st.progress(87)
-
-    # =====================================
-    # ANALYZER
-    # =====================================
-
-    if page == "Analyzer":
-
-    st.title("📊 Odoo Data Analyzer")
-
-    if "uid" not in st.session_state:
-        st.warning("Connect to Odoo first.")
-    else:
-
-        if st.button("📥 Load Customers"):
-
-            models = xmlrpc.client.ServerProxy(
-                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
-            )
-
-            customers = models.execute_kw(
-                st.session_state["database"],
-                st.session_state["uid"],
-                st.session_state["api_key"],
-                "res.partner",
-                "search_read",
-                [[]],
-                {
-                    "fields": ["name", "email"],
-                    "limit": 20
-                }
-            )
-
-            st.dataframe(customers)
-
-    # =====================================
-    # AI INSIGHTS
-    # =====================================
-
-    if page == "AI Insights":
-
-        st.title("🧠 AI Business Insights")
-
-        st.info(
-            "AI predicts 21% sales growth next quarter."
-        )
+        st.progress(87)        
 
         st.success(
             "Customer engagement increased this week."
@@ -435,6 +391,34 @@ else:
         st.warning(
             "Inventory for Product A may run low soon."
         )
+
+# =====================================
+# ANALYZER
+# =====================================
+
+if page == "Analyzer":
+    st.title("📊 Odoo Data Analyzer")
+    st.info("Analyzer coming soon.")
+# =====================================
+# AI INSIGHTS
+# =====================================
+
+if page == "AI Insights":
+
+    st.title("🧠 AI Business Insights")
+
+    st.info(
+        "AI predicts 21% sales growth next quarter."
+    )
+
+    st.success(
+        "Customer engagement increased this week."
+    )
+
+    st.warning(
+        "Inventory for Product A may run low soon."
+    )
+
     # =====================================
     # ODOO CONNECTION
     # =====================================
