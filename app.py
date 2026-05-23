@@ -437,7 +437,7 @@ else:
         st.warning(
             "Inventory for Product A may run low soon."
         )
-     # =====================================
+# =====================================
 # ODOO CONNECTION
 # =====================================
 
@@ -449,12 +449,12 @@ if page == "🔗 Odoo Connection":
 
     odoo_url = st.text_input(
         "Odoo URL",
-        value="https://franciscovortex.odoo.com"
+        "https://franciscovortex.odoo.com"
     )
 
     database = st.text_input(
         "Database",
-        value="franciscovortex"
+        "franciscovortex"
     )
 
     email = st.text_input(
@@ -467,36 +467,4 @@ if page == "🔗 Odoo Connection":
     )
 
     if st.button("🚀 Save Connection"):
-
-        st.session_state["odoo_url"] = odoo_url
-        st.session_state["database"] = database
-        st.session_state["email"] = email
-        st.session_state["api_key"] = api_key
-
-        st.success("Connection settings saved!")
-
-    st.write("")
-
-    st.subheader("📊 Connection Status")
-
-    if "odoo_url" in st.session_state:
-
-        st.success("Configuration Loaded")
-
-        st.write(
-            f"🌐 URL: {st.session_state['odoo_url']}"
-        )
-
-        st.write(
-            f"🗄️ Database: {st.session_state['database']}"
-        )
-
-        st.write(
-            f"📧 Email: {st.session_state['email']}"
-        )
-
-    else:
-
-        st.warning(
-            "No Odoo configuration saved yet."
-        )
+        st.success("Connection Saved!")
