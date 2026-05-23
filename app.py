@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import xmlrpc.client
 
 # =========================================
 # PAGE CONFIG
@@ -468,3 +469,29 @@ if True:
 
     if st.button("🚀 Save Connection"):
         st.success("Connection Saved!")
+if st.button("🔍 Test Connection"):
+    try:
+        common = xmlrpc.client.ServerProxy(
+            f"{odoo_url}/xmlrpc/2/common"
+        )
+
+        uid = common.authenticate(
+            database,
+            email,
+            api_key,
+            {}
+        )
+
+        if uid:
+            st.success(
+                f"✅ Connected successfully! User ID: {uid}"
+            )
+        else:
+            st.error(
+                "❌ Login failed. Check email or API key."
+            )
+
+    except Exception as e:
+        st.error(
+            f"❌ Connection error: {e}"
+        )
