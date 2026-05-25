@@ -408,9 +408,7 @@ if page == "Analyzer":
 
         st.success("✅ Odoo connection detected")
 
-        # ==========================
         # CUSTOMERS
-        # ==========================
 
         if st.button("📥 Load Customers"):
 
@@ -426,24 +424,15 @@ if page == "Analyzer":
                 "search_read",
                 [[]],
                 {
-                    "fields": [
-                        "id",
-                        "name",
-                        "email"
-                    ],
+                    "fields": ["id", "name", "email"],
                     "limit": 20
                 }
             )
 
             st.subheader("👥 Customers")
+            st.dataframe(pd.DataFrame(customers))
 
-            st.dataframe(
-                pd.DataFrame(customers)
-            )
-
-        # ==========================
         # SALES ORDERS
-        # ==========================
 
         if st.button("📈 Load Sales Orders"):
 
@@ -470,31 +459,32 @@ if page == "Analyzer":
             )
 
             st.subheader("📈 Sales Orders")
-
             st.write("Orders found:", len(orders))
 
-if len(orders) > 0:
+            if len(orders) > 0:
 
-    df = pd.DataFrame(orders)
+                df = pd.DataFrame(orders)
 
-    if "partner_id" in df.columns:
+                if "partner_id" in df.columns:
 
-        df["customer"] = df["partner_id"].apply(
-            lambda x: x[1]
-            if isinstance(x, list) and len(x) > 1
-            else str(x)
-        )
+                    df["customer"] = df["partner_id"].apply(
+                        lambda x: x[1]
+                        if isinstance(x, (list, tuple)) and len(x) > 1
+                        else str(x)
+                    )
 
-        df.drop(columns=["partner_id"], inplace=True)
+                    df.drop(
+                        columns=["partner_id"],
+                        inplace=True
+                    )
 
-    st.dataframe(df)
+                st.dataframe(df)
 
-else:
+            else:
 
-    st.warning(
-        "No sales orders found in Odoo."
-    )
-            
+                st.warning(
+                    "No sales orders found in Odoo."
+                )
     # =====================================
     # AI INSIGHTS
     # =====================================
