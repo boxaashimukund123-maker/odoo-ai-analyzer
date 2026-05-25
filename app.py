@@ -500,116 +500,115 @@ else:
                         "No sales orders found in Odoo."
                     )
 
-        # =====================================
+# =====================================
 # AI INSIGHTS
 # =====================================
 
 if page == "AI Insights":
 
     st.title("🧠 AI Business Insights")
-
+    
     st.info(
-        "AI predicts 21% sales growth next quarter."
+    "AI predicts 21% sales growth next quarter."
     )
-
+    
     st.subheader("📈 Revenue Growth")
-
+    
     st.line_chart(
-        [5, 8, 12, 18, 24, 32, 41]
+    [5, 8, 12, 18, 24, 32, 41]
     )
-
+    
     st.subheader("📊 Sales Performance")
-
+    
     st.bar_chart(
-        [20, 14, 30, 25, 18]
+    [20, 14, 30, 25, 18]
     )
-
+    
     st.subheader("⚡ System Performance")
-
+    
     st.write("AI Processing")
     st.progress(92)
-
+    
     st.write("Server Stability")
     st.progress(99)
-
+    
     st.write("Customer Satisfaction")
     st.progress(87)
-
+    
     st.success(
-        "Customer engagement increased this week."
+    "Customer engagement increased this week."
     )
-
+    
     st.warning(
-        "Inventory for Product A may run low soon."
-    )
-        
+    "Inventory for Product A may run low soon."
+    )      
     # =====================================
     # ODOO CONNECTION
     # =====================================
-
+    
     if page == "🔗 Odoo Connection":
-
+    
         st.title("🔗 Odoo Connection")
-
+        
         st.success("Ready for Odoo 18 Integration")
-
+        
         odoo_url = st.text_input(
-            "Odoo URL",
-            value="https://franciscovortex.odoo.com"
+        "Odoo URL",
+        value="https://franciscovortex.odoo.com"
         )
-
+        
         database = st.text_input(
-            "Database",
-            value="franciscovortex"
+        "Database",
+        value="franciscovortex"
         )
-
+        
         email = st.text_input("Email")
-
+        
         api_key = st.text_input(
-            "API Key",
-            type="password"
+        "API Key",
+        type="password"
         )
-
+        
         if st.button("🚀 Save Connection"):
-
+        
             st.session_state["odoo_url"] = odoo_url
             st.session_state["database"] = database
             st.session_state["email"] = email
             st.session_state["api_key"] = api_key
-
-            st.success("Connection Saved!")
-
+        
+        st.success("Connection Saved!")
+        
         if st.button("🔍 Test Connection"):
-
+        
             try:
-
+            
                 common = xmlrpc.client.ServerProxy(
                     f"{odoo_url}/xmlrpc/2/common"
                 )
-
+                
                 uid = common.authenticate(
                     database,
                     email,
                     api_key,
                     {}
                 )
-
+                
                 if uid:
-
+                
                     st.session_state["uid"] = uid
-
+                
                     st.success(
                         f"✅ Connected successfully! User ID: {uid}"
                     )
-
+                
                 else:
-
+                
                     st.error(
                         "❌ Login failed. Check email or API key."
                     )
-
+                
             except Exception as e:
-
+                
                 st.error(
-                    f"❌ Connection error: {e}"
+                        f"❌ Connection error: {e}"
                 )
