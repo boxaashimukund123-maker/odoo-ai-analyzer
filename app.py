@@ -431,7 +431,34 @@ else:
 
                 st.dataframe(
                     pd.DataFrame(customers)
-                )		
+                )
+        if st.button("📈 Load Sales Orders"):
+
+            models = xmlrpc.client.ServerProxy(
+                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+            )
+
+            orders = models.execute_kw(
+                st.session_state["database"],
+                st.session_state["uid"],
+                st.session_state["api_key"],
+                "sale.order",
+                "search_read",
+                [[]],
+                {
+                    "fields": [
+                        "name",
+                        "partner_id",
+                        "amount_total",
+                        "state"
+                    ],
+                    "limit": 20
+                }
+            )
+
+            st.subheader("📈 Sales Orders")
+
+            st.dataframe(pd.DataFrame(orders))		
     
 
     # =====================================
