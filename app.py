@@ -496,7 +496,7 @@ else:
     # AI INSIGHTS
     # =====================================
 
-if page == "AI Insights":
+ if "page" in locals() and page == "AI Insights":
 
     st.title("🧠 AI Business Insights")
 
