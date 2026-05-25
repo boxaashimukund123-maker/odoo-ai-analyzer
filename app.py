@@ -498,7 +498,9 @@ else:
 
     if page == "AI Insights":
 
+
     st.title("🧠 AI Business Insights")
+
 
     st.info(
         "AI predicts 21% sales growth next quarter."
