@@ -498,9 +498,7 @@ else:
 
     if page == "AI Insights":
 
-
     st.title("🧠 AI Business Insights")
-
 
     st.info(
         "AI predicts 21% sales growth next quarter."
@@ -535,8 +533,10 @@ else:
 
     st.warning(
         "Inventory for Product A may run low soon."
-    ) 
+    )
 
+
+    
     # =====================================
     # ODOO CONNECTION
     # =====================================
