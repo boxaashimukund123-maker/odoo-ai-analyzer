@@ -394,7 +394,6 @@ else:
     # =====================================
     # ANALYZER
     # =====================================
-
 if page == "Analyzer":
 
     st.title("📊 Odoo Data Analyzer")
