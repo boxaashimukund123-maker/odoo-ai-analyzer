@@ -458,7 +458,18 @@ else:
 
             st.subheader("📈 Sales Orders")
 
-            	
+           st.write(orders)
+st.write("Orders found:", len(orders))
+
+df = pd.DataFrame(orders)
+
+if "partner_id" in df.columns:
+    df["customer"] = df["partner_id"].apply(
+        lambda x: x[1] if isinstance(x, list) and len(x) > 1 else str(x)
+    )
+    df.drop(columns=["partner_id"], inplace=True)
+
+st.dataframe(df) 	
 
     # =====================================
     # AI INSIGHTS
