@@ -395,7 +395,7 @@ else:
     # ANALYZER
     # =====================================
 
-    if page == "Analyzer":
+if page == "Analyzer":
 
     st.title("📊 Odoo Data Analyzer")
 
@@ -474,25 +474,27 @@ else:
 
             st.write("Orders found:", len(orders))
 
-            if len(orders) > 0:
+if len(orders) > 0:
 
-                df = pd.DataFrame(orders)
+    df = pd.DataFrame(orders)
 
-                if "partner_id" in df.columns:
+    if "partner_id" in df.columns:
 
-                    df["customer"] = df["partner_id"].apply(
-                        lambda x: x[1]
-                        if isinstance(x, list) and len(x) > 1
-                        else str(x)
-                    )
+        df["customer"] = df["partner_id"].apply(
+            lambda x: x[1]
+            if isinstance(x, list) and len(x) > 1
+            else str(x)
+        )
 
-                st.dataframe(df)
+        df.drop(columns=["partner_id"], inplace=True)
 
-            else:
+    st.dataframe(df)
 
-                st.warning(
-                    "No sales orders found in Odoo."
-                )
+else:
+
+    st.warning(
+        "No sales orders found in Odoo."
+    )
             
     # =====================================
     # AI INSIGHTS
