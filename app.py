@@ -509,19 +509,19 @@ if page == "AI Insights":
     st.title("🧠 AI Business Insights")
     
     st.info(
-    "AI predicts 21% sales growth next quarter."
+        "AI predicts 21% sales growth next quarter."
     )
     
     st.subheader("📈 Revenue Growth")
     
     st.line_chart(
-    [5, 8, 12, 18, 24, 32, 41]
+        [5, 8, 12, 18, 24, 32, 41]
     )
     
     st.subheader("📊 Sales Performance")
     
     st.bar_chart(
-    [20, 14, 30, 25, 18]
+        [20, 14, 30, 25, 18]
     )
     
     st.subheader("⚡ System Performance")
@@ -536,11 +536,11 @@ if page == "AI Insights":
     st.progress(87)
     
     st.success(
-    "Customer engagement increased this week."
+        "Customer engagement increased this week."
     )
     
     st.warning(
-    "Inventory for Product A may run low soon."
+        "Inventory for Product A may run low soon."
     )      
     # =====================================
     # ODOO CONNECTION
