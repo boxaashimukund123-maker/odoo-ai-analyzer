@@ -489,9 +489,12 @@ else:
 
                     st.warning(
                         "No sales orders found in Odoo."
-# =====================================
-# AI INSIGHTS
-# =====================================
+                         
+                        )
+   
+    # =====================================
+    # AI INSIGHTS
+    # =====================================
 
 if page == "AI Insights":
 
@@ -531,7 +534,7 @@ if page == "AI Insights":
     st.warning(
         "Inventory for Product A may run low soon."
     )
-
+ 
 
     # =====================================
     # ODOO CONNECTION
