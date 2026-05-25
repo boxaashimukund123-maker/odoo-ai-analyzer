@@ -394,8 +394,7 @@ else:
     # =====================================
     # ANALYZER
     # =====================================
-
-    if page == "Analyzer":
+if page == "Analyzer":
 
     st.title("📊 Odoo Data Analyzer")
 
@@ -424,6 +423,8 @@ else:
             )
 
             st.dataframe(pd.DataFrame(customers))
+    
+
     # =====================================
     # AI INSIGHTS
     # =====================================
