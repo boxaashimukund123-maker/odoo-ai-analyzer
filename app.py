@@ -391,107 +391,99 @@ else:
             "Inventory for Product A may run low soon."
         )
 
-    # =====================================
-    # ANALYZER
-    # =====================================
+# =====================================
+# ANALYZER
+# =====================================
 
-    if page == "Analyzer":
+if page == "Analyzer":
 
-        st.title("📊 Odoo Data Analyzer")
+    st.title("📊 Odoo Data Analyzer")
 
-        if "uid" not in st.session_state:
+    if "uid" not in st.session_state:
 
-            st.warning(
-                "⚠️ Connect to Odoo first from the Odoo Connection page."
+        st.warning(
+            "⚠️ Connect to Odoo first from the Odoo Connection page."
+        )
+
+    else:
+
+        st.success("✅ Odoo connection detected")
+
+        if st.button("📥 Load Customers"):
+
+            models = xmlrpc.client.ServerProxy(
+                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
             )
 
-        else:
+            customers = models.execute_kw(
+                st.session_state["database"],
+                st.session_state["uid"],
+                st.session_state["api_key"],
+                "res.partner",
+                "search_read",
+                [[]],
+                {
+                    "fields": ["id", "name", "email"],
+                    "limit": 20
+                }
+            )
 
-            st.success("✅ Odoo connection detected")
+            st.subheader("👥 Customers")
+            st.dataframe(pd.DataFrame(customers))
 
-            # -------------------------
-            # LOAD CUSTOMERS
-            # -------------------------
+        if st.button("📈 Load Sales Orders"):
 
-            if st.button("📥 Load Customers"):
+            models = xmlrpc.client.ServerProxy(
+                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+            )
 
-                models = xmlrpc.client.ServerProxy(
-                    f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+            orders = models.execute_kw(
+                st.session_state["database"],
+                st.session_state["uid"],
+                st.session_state["api_key"],
+                "sale.order",
+                "search_read",
+                [[]],
+                {
+                    "fields": [
+                        "name",
+                        "partner_id",
+                        "amount_total",
+                        "state"
+                    ],
+                    "limit": 20
+                }
+            )
+
+            st.subheader("📈 Sales Orders")
+            st.write("Orders found:", len(orders))
+
+            if len(orders) > 0:
+
+                df = pd.DataFrame(orders)
+
+                if "partner_id" in df.columns:
+
+                    df["customer"] = df["partner_id"].apply(
+                        lambda x: x[1]
+                        if isinstance(x, (list, tuple)) and len(x) > 1
+                        else str(x)
+                    )
+
+                    df.drop(
+                        columns=["partner_id"],
+                        inplace=True
+                    )
+
+                st.dataframe(df)
+
+            else:
+
+                st.warning(
+                    "No sales orders found in Odoo."
                 )
 
-                customers = models.execute_kw(
-                    st.session_state["database"],
-                    st.session_state["uid"],
-                    st.session_state["api_key"],
-                    "res.partner",
-                    "search_read",
-                    [[]],
-                    {
-                        "fields": ["id", "name", "email"],
-                        "limit": 20
-                    }
-                )
-
-                st.subheader("👥 Customers")
-                st.dataframe(pd.DataFrame(customers))
-
-            # -------------------------
-            # LOAD SALES ORDERS
-            # -------------------------
-
-            if st.button("📈 Load Sales Orders"):
-
-                models = xmlrpc.client.ServerProxy(
-                    f"{st.session_state['odoo_url']}/xmlrpc/2/object"
-                )
-
-                orders = models.execute_kw(
-                    st.session_state["database"],
-                    st.session_state["uid"],
-                    st.session_state["api_key"],
-                    "sale.order",
-                    "search_read",
-                    [[]],
-                    {
-                        "fields": [
-                            "name",
-                            "partner_id",
-                            "amount_total",
-                            "state"
-                        ],
-                        "limit": 20
-                    }
-                )
-
-                st.subheader("📈 Sales Orders")
-                st.write("Orders found:", len(orders))
-
-                if len(orders) > 0:
-
-                    df = pd.DataFrame(orders)
-
-                    if "partner_id" in df.columns:
-
-                        df["customer"] = df["partner_id"].apply(
-                            lambda x: x[1]
-                            if isinstance(x, (list, tuple)) and len(x) > 1
-                            else str(x)
-                        )
-
-                        df.drop(
-                            columns=["partner_id"],
-                            inplace=True
-                        )
-
-                    st.dataframe(df)
-
-                else:
-
-                    st.warning(
-                        "No sales orders found in Odoo."
-
-                        )
-
+        
     # =====================================
     # AI INSIGHTS
     # =====================================
