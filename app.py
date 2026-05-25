@@ -394,35 +394,44 @@ else:
     # =====================================
     # ANALYZER
     # =====================================
-if page == "Analyzer":
 
-    st.title("📊 Odoo Data Analyzer")
+    if page == "Analyzer":
 
-    if "uid" not in st.session_state:
-        st.warning("⚠️ Connect to Odoo first from the Odoo Connection page.")
+        st.title("📊 Odoo Data Analyzer")
 
-    else:
-
-        if st.button("📥 Load Customers"):
-
-            models = xmlrpc.client.ServerProxy(
-                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+        if "uid" not in st.session_state:
+            st.warning(
+                "⚠️ Connect to Odoo first from the Odoo Connection page."
             )
 
-            customers = models.execute_kw(
-                st.session_state["database"],
-                st.session_state["uid"],
-                st.session_state["api_key"],
-                "res.partner",
-                "search_read",
-                [[]],
-                {
-                    "fields": ["name", "email"],
-                    "limit": 20
-                }
-            )
+        else:
 
-            st.dataframe(pd.DataFrame(customers))
+            st.success("✅ Odoo connection detected")
+
+            if st.button("📥 Load Customers"):
+
+                models = xmlrpc.client.ServerProxy(
+                    f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+                )
+
+                customers = models.execute_kw(
+                    st.session_state["database"],
+                    st.session_state["uid"],
+                    st.session_state["api_key"],
+                    "res.partner",
+                    "search_read",
+                    [[]],
+                    {
+                        "fields": ["name", "email"],
+                        "limit": 20
+                    }
+                )
+
+                st.subheader("👥 Customers")
+
+                st.dataframe(
+                    pd.DataFrame(customers)
+                )		
     
 
     # =====================================
