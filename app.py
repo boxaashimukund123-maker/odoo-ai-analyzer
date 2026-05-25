@@ -491,13 +491,11 @@ else:
                         "No sales orders found in Odoo."
                          
                         )
-   
-    # =====================================
-    # AI INSIGHTS
-    # =====================================
+   # =====================================
+   # AI INSIGHTS
+   # =====================================
 
- if "page" in locals() and page == "AI Insights":
-
+if page == "AI Insights":
     st.title("🧠 AI Business Insights")
 
     st.info(
