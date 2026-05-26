@@ -500,71 +500,82 @@ else:
                         "No sales orders found in Odoo."
                     )
 
-# =====================================
-# AI INSIGHTS
-# =====================================
-
+    # =====================================
+    # AI INSIGHTS
+    # =====================================
     if page == "AI Insights":
     
-        st.title("🧠 AI Business Insights")
-
-        models = xmlrpc.client.ServerProxy(
-            f"{st.session_state['odoo_url']}/xmlrpc/2/object"
-        )
-
-        orders = models.execute_kw(
-            st.session_state["database"],
-            st.session_state["uid"],
-            st.session_state["api_key"],
-            "sale.order",
-            "search_read",
-            [[]],
-            {
-                "fields": ["name", "amount_total"]
-            }
-        )
-
-        total_revenue = sum(
-            order["amount_total"]
-            for order in orders
-        )
-
-        total_orders = len(orders)
-
-        avg_order = (
-            total_revenue / total_orders
-            if total_orders > 0
-            else 0
-        )
-
-        st.metric(
-            "💰 Total Revenue",
-            f"${total_revenue:.2f}"
-        )
-
-        st.metric(
-            "📦 Orders",
-            total_orders
-        )
-
-        st.metric(
-            "📈 Average Order Value",
-            f"${avg_order:.2f}"
-        )
-
-        st.success(
-            f"Loaded {total_orders} sales orders from Odoo."
-        )
-
-        revenues = [
-            order["amount_total"]
-            for order in orders
-        ]
-
-        st.subheader("📊 Revenue by Order")
-
-        st.bar_chart(revenues)
-
+            st.title("🧠 AI Business Insights")
+    
+            if "odoo_url" not in st.session_state:
+                st.warning(
+                    "⚠️ Go to Odoo Connection and save your connection first."
+                )
+                st.stop()
+    
+            if "uid" not in st.session_state:
+                st.warning(
+                    "⚠️ Test your Odoo connection first."
+                )
+                st.stop()
+    
+            models = xmlrpc.client.ServerProxy(
+                f"{st.session_state['odoo_url']}/xmlrpc/2/object"
+            )
+    
+            orders = models.execute_kw(
+                st.session_state["database"],
+                st.session_state["uid"],
+                st.session_state["api_key"],
+                "sale.order",
+                "search_read",
+                [[]],
+                {
+                    "fields": ["name", "amount_total"]
+                }
+            )
+    
+            total_revenue = sum(
+                order["amount_total"]
+                for order in orders
+            )
+    
+            total_orders = len(orders)
+    
+            avg_order = (
+                total_revenue / total_orders
+                if total_orders > 0
+                else 0
+            )
+    
+            st.metric(
+                "💰 Total Revenue",
+                f"${total_revenue:.2f}"
+            )
+    
+            st.metric(
+                "📦 Orders",
+                total_orders
+            )
+    
+            st.metric(
+                "📈 Average Order Value",
+                f"${avg_order:.2f}"
+            )
+    
+            st.success(
+                f"Loaded {total_orders} sales orders from Odoo."
+            )
+    
+            revenues = [
+                order["amount_total"]
+                for order in orders
+            ]
+    
+            st.subheader("📊 Revenue by Order")
+    
+            st.bar_chart(revenues)
+          
     # =====================================
     # ODOO CONNECTION
     # =====================================
