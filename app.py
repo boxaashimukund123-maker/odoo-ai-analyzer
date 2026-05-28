@@ -656,7 +656,7 @@ if page == "AI Insights":
     # ODOO CONNECTION
     # =====================================
     
-    if page == "🔗 Odoo Connection":
+if page == "🔗 Odoo Connection":
     
         st.title("🔗 Odoo Connection")
         
