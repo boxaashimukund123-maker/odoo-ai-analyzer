@@ -355,7 +355,7 @@ st.session_state.logged_in = True
 # MAIN APP
 # =========================================
 
-else:
+
 
     st.sidebar.title("🤖 Odoo AI")
 
