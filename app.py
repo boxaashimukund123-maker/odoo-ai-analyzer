@@ -174,7 +174,79 @@ h1 {
 .stSpinner {
     display: none !important;
 }
+/* =========================================
+   PAGE TRANSITIONS
+========================================= */
 
+section.main > div {
+
+    animation: pageFade 0.45s ease;
+}
+
+/* Smooth fade + slight slide */
+
+@keyframes pageFade {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(12px) scale(0.98);
+
+        filter: blur(6px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0px) scale(1);
+
+        filter: blur(0px);
+    }
+}
+
+/* Cards animate separately */
+
+.card {
+
+    animation: cardPop 0.5s ease;
+}
+
+@keyframes cardPop {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0px);
+
+    }
+}
+
+/* Sidebar smoothness */
+
+section[data-testid="stSidebar"] * {
+
+    transition: all 0.25s ease;
+}
+
+/* Radio buttons hover */
+
+.stRadio label:hover {
+
+    transform: translateX(4px);
+
+    transition: 0.2s ease;
+}
 </style>
 """, unsafe_allow_html=True)
 # =========================================
