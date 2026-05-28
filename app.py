@@ -18,15 +18,16 @@ st.set_page_config(
 
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
-
-# =========================================
-# PREMIUM CSS
-# =========================================
+# =====================================
+# PREMIUM ANIMATED UI
+# =====================================
 
 st.markdown("""
 <style>
 
-/* MAIN BACKGROUND */
+/* =====================================
+   GLOBAL BACKGROUND
+===================================== */
 
 .stApp {
 
@@ -42,186 +43,296 @@ st.markdown("""
     overflow-x: hidden;
 }
 
-/* PARTICLES */
+/* =====================================
+   ANIMATIONS
+===================================== */
 
-.particles {
+@keyframes fadeIn {
 
-    position: fixed;
-
-    width: 100%;
-
-    height: 100%;
-
-    top: 0;
-
-    left: 0;
-
-    overflow: hidden;
-
-    z-index: 0;
-
-    pointer-events: none;
-}
-
-.particle {
-
-    position: absolute;
-
-    width: 18px;
-
-    height: 18px;
-
-    background: rgba(59,130,246,0.9);
-
-    border-radius: 50%;
-
-    animation: float 12s linear infinite;
-
-    filter: blur(1px);
-
-    box-shadow:
-        0px 0px 25px rgba(59,130,246,0.9);
-}
-
-.particle:nth-child(1) {
-    left: 10%;
-    animation-duration: 12s;
-}
-
-.particle:nth-child(2) {
-    left: 25%;
-    animation-duration: 18s;
-}
-
-.particle:nth-child(3) {
-    left: 50%;
-    animation-duration: 15s;
-}
-
-.particle:nth-child(4) {
-    left: 75%;
-    animation-duration: 20s;
-}
-
-.particle:nth-child(5) {
-    left: 90%;
-    animation-duration: 13s;
-}
-
-@keyframes float {
-
-    0% {
-        transform: translateY(100vh);
+    from {
         opacity: 0;
+        transform: translateY(20px);
     }
 
-    10% {
+    to {
         opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes glowPulse {
+
+    0% {
+        box-shadow: 0 0 10px #3b82f6;
+    }
+
+    50% {
+        box-shadow: 0 0 30px #3b82f6;
     }
 
     100% {
-        transform: translateY(-10vh);
-        opacity: 0;
+        box-shadow: 0 0 10px #3b82f6;
     }
 }
 
-/* SIDEBAR */
+@keyframes floating {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* =====================================
+   PAGE LOAD
+===================================== */
+
+.main .block-container {
+
+    animation: fadeIn 0.8s ease;
+}
+
+/* =====================================
+   SIDEBAR
+===================================== */
 
 section[data-testid="stSidebar"] {
 
-    background: rgba(10,10,20,0.8);
+    background: linear-gradient(
+        180deg,
+        #000814,
+        #001845
+    );
 
-    backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(255,255,255,0.1);
 
-    border-right: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 0 25px rgba(59,130,246,0.25);
+
+    animation: slideIn 0.8s ease;
 }
 
-/* BUTTONS */
+/* =====================================
+   TITLES
+===================================== */
+
+h1, h2, h3 {
+
+    color: white !important;
+
+    font-weight: 800 !important;
+
+    animation: slideIn 0.6s ease;
+}
+
+/* =====================================
+   BUTTONS
+===================================== */
 
 .stButton > button {
-
-    width: 100%;
-
-    border-radius: 14px;
-
-    padding: 12px;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    border: none;
-
-    color: white;
 
     background: linear-gradient(
         135deg,
         #2563eb,
         #3b82f6
-    );
+    ) !important;
 
-    transition: 0.3s ease;
+    color: white !important;
+
+    border-radius: 16px !important;
+
+    border: none !important;
+
+    font-weight: bold !important;
+
+    transition: all 0.3s ease !important;
+
+    padding: 12px 20px !important;
 }
 
 .stButton > button:hover {
 
-    transform: scale(1.03);
+    transform: translateY(-5px) scale(1.03);
 
-    box-shadow:
-        0px 0px 30px rgba(59,130,246,0.7);
+    animation: glowPulse 2s infinite;
+
+    box-shadow: 0 0 35px rgba(59,130,246,0.7);
 }
 
-/* INPUTS */
+/* =====================================
+   INPUTS
+===================================== */
 
 .stTextInput input {
 
-    background: rgba(255,255,255,0.06) !important;
+    background: rgba(255,255,255,0.08) !important;
+
+    border-radius: 14px !important;
+
+    border: 1px solid rgba(255,255,255,0.12) !important;
 
     color: white !important;
 
-    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
 }
 
-/* KPI CARDS */
+.stTextInput input:focus {
 
-.card {
+    border: 1px solid #60a5fa !important;
+
+    box-shadow: 0 0 20px rgba(96,165,250,0.7) !important;
+}
+
+/* =====================================
+   SUCCESS / ERROR BOXES
+===================================== */
+
+div[data-baseweb="notification"] {
+
+    border-radius: 18px !important;
+
+    animation: fadeIn 0.5s ease;
+}
+
+/* =====================================
+   DATAFRAME
+===================================== */
+
+[data-testid="stDataFrame"] {
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    animation: fadeIn 0.8s ease;
+}
+
+/* =====================================
+   METRIC CARDS
+===================================== */
+
+.metric-card {
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(15px);
+
+    border-radius: 20px;
 
     padding: 25px;
 
-    border-radius: 22px;
+    transition: all 0.3s ease;
 
-    text-align: center;
-
-    transition: 0.3s ease;
-
-    color: white;
+    animation: fadeIn 0.8s ease;
 }
 
-.card:hover {
+.metric-card:hover {
 
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-8px);
 
-    box-shadow:
-        0px 0px 30px rgba(59,130,246,0.45);
+    box-shadow: 0 0 35px rgba(59,130,246,0.35);
 }
 
-.blue {
-    background: linear-gradient(135deg,#2563eb,#1e3a8a);
+/* =====================================
+   FLOATING PARTICLES
+===================================== */
+
+.particle {
+
+    position: fixed;
+
+    width: 14px;
+
+    height: 14px;
+
+    border-radius: 50%;
+
+    background: #60a5fa;
+
+    box-shadow: 0 0 25px #60a5fa;
+
+    z-index: -1;
+
+    animation: floating 6s infinite ease-in-out;
 }
 
-.green {
-    background: linear-gradient(135deg,#16a34a,#14532d);
+.dot1 {
+    left: 10%;
+    top: 20%;
 }
 
-.orange {
-    background: linear-gradient(135deg,#d97706,#78350f);
+.dot2 {
+    left: 80%;
+    top: 30%;
 }
 
-.purple {
-    background: linear-gradient(135deg,#9333ea,#581c87);
+.dot3 {
+    left: 50%;
+    top: 70%;
+}
+
+.dot4 {
+    left: 20%;
+    top: 85%;
+}
+
+.dot5 {
+    left: 90%;
+    top: 60%;
+}
+
+/* =====================================
+   SCROLLBAR
+===================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #001233;
+}
+
+::-webkit-scrollbar-thumb {
+
+    background: #3b82f6;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #60a5fa;
 }
 
 </style>
+
+<div class="particle dot1"></div>
+<div class="particle dot2"></div>
+<div class="particle dot3"></div>
+<div class="particle dot4"></div>
+<div class="particle dot5"></div>
+
 """, unsafe_allow_html=True)
 
 # =========================================
@@ -239,40 +350,7 @@ st.markdown("""
 
 </div>
 """, unsafe_allow_html=True)
-
-# =========================================
-# LOGIN PAGE
-# =========================================
-
-if not st.session_state.logged_in:
-
-    st.title("🤖 Odoo AI Analyzer")
-
-    st.subheader(
-        "AI-powered ERP analytics platform"
-    )
-
-    st.write("")
-
-    username = st.text_input("👤 Username")
-
-    password = st.text_input(
-        "🔒 Password",
-        type="password"
-    )
-
-    if st.button("🚀 Login"):
-
-        if username == "admin" and password == "admin":
-
-            st.session_state.logged_in = True
-
-            st.rerun()
-
-        else:
-
-            st.error("Wrong username or password")
-
+st.session_state.logged_in = True
 # =========================================
 # MAIN APP
 # =========================================
