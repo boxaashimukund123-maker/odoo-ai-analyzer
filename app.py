@@ -355,9 +355,7 @@ st.session_state.logged_in = True
 # MAIN APP
 # =========================================
 
-
-
-    st.sidebar.title("🤖 Odoo AI")
+ st.sidebar.title("🤖 Odoo AI")
 
     page = st.sidebar.radio(
     "Navigation",
