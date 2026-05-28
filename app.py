@@ -195,6 +195,52 @@ page = st.sidebar.radio(
     # =====================================
     # DASHBOARD
     # =====================================
+# =========================================
+# PREMIUM LOGIN
+# =========================================
+
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+
+if not st.session_state.logged_in:
+
+    st.markdown("""
+    <div class="card" style="
+        max-width: 500px;
+        margin: auto;
+        margin-top: 80px;
+        text-align: center;
+    ">
+        <h1>🤖 Odoo AI</h1>
+        <p style="
+            color: #94a3b8;
+            font-size: 18px;
+        ">
+            Enterprise AI Analytics Platform
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    username = st.text_input("👤 Username")
+
+    password = st.text_input(
+        "🔒 Password",
+        type="password"
+    )
+
+    if st.button("🚀 Login"):
+
+        if username == "master" and password == "password":
+
+            st.session_state.logged_in = True
+
+            st.rerun()
+
+        else:
+
+            st.error("Invalid credentials")
+
+    st.stop()
 
 if page == "Dashboard":
 
