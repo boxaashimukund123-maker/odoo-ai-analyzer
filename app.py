@@ -370,7 +370,7 @@ page = st.sidebar.radio(
     # DASHBOARD
     # =====================================
 
-    if page == "Dashboard":
+if page == "Dashboard":
 
         st.title("🚀 Odoo AI Dashboard")
 
@@ -473,7 +473,7 @@ page = st.sidebar.radio(
     # ANALYZER
     # =====================================
 
-    if page == "Analyzer":
+if page == "Analyzer":
 
         st.title("📊 Odoo Data Analyzer")
 
@@ -579,7 +579,7 @@ page = st.sidebar.radio(
     # =====================================
     # AI INSIGHTS
     # =====================================
-    if page == "AI Insights":
+if page == "AI Insights":
     
             st.title("🧠 AI Business Insights")
     
