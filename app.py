@@ -247,16 +247,21 @@ section[data-testid="stSidebar"] * {
 /* METRIC CARD HOVER */
 
 div[data-testid="metric-container"] {
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
     border-radius: 15px;
 }
 
 div[data-testid="metric-container"]:hover {
+
     transform: translateY(-12px) scale(1.05);
+
+    background: rgba(255,255,255,0.05);
+
     box-shadow:
-0 0 15px rgba(0,150,255,0.8),
-0 0 35px rgba(0,150,255,0.6),
-0 0 60px rgba(0,150,255,0.4);
+    0 0 15px rgba(0,150,255,0.9),
+    0 0 35px rgba(0,150,255,0.7),
+    0 0 60px rgba(0,150,255,0.5),
+    0 0 100px rgba(0,150,255,0.3);
 }
 
 /* EXTRA PAGE LOAD EFFECT */
