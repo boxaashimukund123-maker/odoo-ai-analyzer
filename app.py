@@ -117,26 +117,35 @@ h1 {
 
 .card {
 
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.06);
 
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
 
-    border-radius: 22px;
+    border-radius: 24px;
 
     padding: 28px;
 
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(22px);
 
-    transition: 0.3s ease;
+    -webkit-backdrop-filter: blur(22px);
 
-    box-shadow: 0 0 30px rgba(0,0,0,0.25);
+    transition: all 0.35s ease;
+
+    box-shadow:
+    0 8px 32px rgba(0,0,0,0.35),
+    0 0 20px rgba(96,165,250,0.08);
 }
 
 .card:hover {
 
-    transform: translateY(-6px);
+    transform: translateY(-8px);
 
-    box-shadow: 0 0 40px rgba(96,165,250,0.25);
+    border: 1px solid rgba(96,165,250,0.4);
+
+    box-shadow:
+    0 12px 40px rgba(0,0,0,0.45),
+    0 0 25px rgba(96,165,250,0.25),
+    0 0 50px rgba(96,165,250,0.12);
 }
 
 /* =========================================
@@ -161,8 +170,11 @@ h1 {
     font-weight: 800;
 
     color: #60a5fa;
-}
 
+    text-shadow:
+    0 0 10px rgba(96,165,250,0.5),
+    0 0 20px rgba(96,165,250,0.3);
+}
 /* =========================================
    HIDE STREAMLIT STUFF
 ========================================= */
