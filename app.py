@@ -253,15 +253,14 @@ div[data-testid="metric-container"] {
 
 div[data-testid="metric-container"]:hover {
 
-    transform: translateY(-12px) scale(1.05);
+    transform: translateY(-10px) scale(1.04);
 
-    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(77,166,255,0.5);
 
     box-shadow:
-    0 0 15px rgba(0,150,255,0.9),
-    0 0 35px rgba(0,150,255,0.7),
-    0 0 60px rgba(0,150,255,0.5),
-    0 0 100px rgba(0,150,255,0.3);
+    0 0 20px rgba(0,150,255,0.85),
+    0 0 40px rgba(0,150,255,0.55),
+    0 0 70px rgba(0,150,255,0.25);
 }
 
 /* EXTRA PAGE LOAD EFFECT */
