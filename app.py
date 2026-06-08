@@ -241,11 +241,8 @@ section[data-testid="stSidebar"] * {
 
 /* Radio buttons hover */
 
-.stRadio label:hover {
-
-    transform: translateX(4px);
-
-    transition: 0.2s ease;
+.stRadio label:hover{
+    transform: translateX(10px);
 }
 /* METRIC CARD HOVER */
 
@@ -255,8 +252,11 @@ div[data-testid="metric-container"] {
 }
 
 div[data-testid="metric-container"]:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 0 25px rgba(0,150,255,0.7);
+    transform: translateY(-12px) scale(1.05);
+    box-shadow:
+0 0 15px rgba(0,150,255,0.8),
+0 0 35px rgba(0,150,255,0.6),
+0 0 60px rgba(0,150,255,0.4);
 }
 
 /* EXTRA PAGE LOAD EFFECT */
@@ -352,7 +352,11 @@ if not st.session_state.logged_in:
 
 if page == "Dashboard":
 
-        st.title("🚀 Odoo AI Dashboard")
+        st.markdown("""
+<h1 class="glow-title">
+🚀 Odoo AI Dashboard
+</h1>
+""", unsafe_allow_html=True)
 
         st.success(
             "AI systems operational • Live monitoring enabled"
