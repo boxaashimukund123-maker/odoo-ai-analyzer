@@ -247,6 +247,42 @@ section[data-testid="stSidebar"] * {
 
     transition: 0.2s ease;
 }
+/* METRIC CARD HOVER */
+
+div[data-testid="metric-container"] {
+    transition: all 0.3s ease;
+    border-radius: 15px;
+}
+
+div[data-testid="metric-container"]:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 25px rgba(0,150,255,0.7);
+}
+
+/* EXTRA PAGE LOAD EFFECT */
+
+.main {
+    animation: pageLoad 0.8s ease;
+}
+
+@keyframes pageLoad {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/* SIDEBAR GLOW */
+
+.stRadio label:hover {
+    color: #4da6ff;
+    text-shadow: 0 0 10px #4da6ff;
+}
 </style>
 """, unsafe_allow_html=True)
 # =========================================
