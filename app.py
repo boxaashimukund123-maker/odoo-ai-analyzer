@@ -283,6 +283,25 @@ div[data-testid="metric-container"]:hover {
     color: #4da6ff;
     text-shadow: 0 0 10px #4da6ff;
 }
+.glow-title{
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow{
+    0%{
+        text-shadow: 0 0 10px #4da6ff;
+    }
+
+    50%{
+        text-shadow:
+        0 0 20px #4da6ff,
+        0 0 40px #4da6ff;
+    }
+
+    100%{
+        text-shadow: 0 0 10px #4da6ff;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 # =========================================
