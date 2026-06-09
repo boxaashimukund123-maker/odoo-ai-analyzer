@@ -399,7 +399,8 @@ if page == "Dashboard":
 
         st.write("")
 
-        # KPI CARDS
+
+                    # KPI CARDS
 
         c1, c2, c3, c4 = st.columns(4)
 
@@ -666,62 +667,7 @@ if page == "AI Insights":
                 order["amount_total"]
                 for order in orders
             ]
-    
-            st.subheader("📊 Revenue by Order")
-    
-            st.bar_chart(revenues)
-            st.subheader("🏆 Top Customers")
-
-            customer_orders = models.execute_kw(
-    st.session_state["database"],
-    st.session_state["uid"],
-    st.session_state["api_key"],
-    "sale.order",
-    "search_read",
-    [[]],
-    {
-        "fields": [
-            "partner_id",
-            "amount_total"
-        ],
-        "limit": 5
-    }
-)
-
-st.write(customer_orders)
-
-                if order["partner_id"]:
-
-                    customer_name = order["partner_id"][1]
-
-                    customer_totals[customer_name] = (
-                        customer_totals.get(customer_name, 0)
-                        + order["amount_total"]
-                    )
-
-            top_customers = sorted(
-                customer_totals.items(),
-                key=lambda x: x[1],
-                reverse=True
-            )[:5]
-
-            if len(top_customers) > 0:
-
-                for rank, (customer, revenue) in enumerate(
-                    top_customers,
-                    start=1
-                ):
-
-                    st.write(
-                        f"{rank}. {customer} — ${revenue:,.2f}"
-                    )
-
-            else:
-
-                st.warning(
-                    "No customer revenue data found."
-                )
-          
+                          
     # =====================================
     # ODOO CONNECTION
     # =====================================
