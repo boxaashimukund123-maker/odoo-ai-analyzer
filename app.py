@@ -673,23 +673,22 @@ if page == "AI Insights":
             st.subheader("🏆 Top Customers")
 
             customer_orders = models.execute_kw(
-                st.session_state["database"],
-                st.session_state["uid"],
-                st.session_state["api_key"],
-                "sale.order",
-                "search_read",
-                [[]],
-                {
-                    "fields": [
-                        "partner_id",
-                        "amount_total"
-                    ]
-                }
-            )
+    st.session_state["database"],
+    st.session_state["uid"],
+    st.session_state["api_key"],
+    "sale.order",
+    "search_read",
+    [[]],
+    {
+        "fields": [
+            "partner_id",
+            "amount_total"
+        ],
+        "limit": 5
+    }
+)
 
-            customer_totals = {}
-
-            for order in customer_orders:
+st.write(customer_orders)
 
                 if order["partner_id"]:
 
